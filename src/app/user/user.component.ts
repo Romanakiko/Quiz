@@ -4,6 +4,7 @@ import {AuthComponent} from './auth/auth.component';
 import {UserPageComponent} from './user-page/user-page.component';
 import {BehaviorSubject} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {SocialAuthService} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,7 @@ import {AsyncPipe} from '@angular/common';
 })
 export class UserComponent implements OnInit {
   private supabase = inject(SupabaseService)
+  private googleAuthService = inject(SocialAuthService)
 
   session = new BehaviorSubject(this.supabase.session)
 
@@ -28,6 +30,21 @@ export class UserComponent implements OnInit {
     this.supabase.authChanges((_, session) => {
       this.session.next(session)
       console.log('auth successfull', session)
-    })
+    });
+    this.googleAuthService.authState.subscribe((user) => {
+      if(user) {
+        console.log('user state changed', user);
+       this.signInWithGoogle(user.idToken);
+      }
+    });
+  }
+  async signInWithGoogle(token: string) {
+    try {
+      const { data, error } = await this.supabase.signInWithGoogle(token);
+      if (error) throw error;
+      console.log('user auth in supabase succeed', data);
+    } catch (error) {
+      console.log('user auth in supabase get error', error);
+    }
   }
 }

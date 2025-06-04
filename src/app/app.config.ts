@@ -2,7 +2,22 @@ import { ApplicationConfig, provideZoneChangeDetection, provideExperimentalZonel
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import {GoogleLoginProvider, SocialAuthServiceConfig} from '@abacritt/angularx-social-login';
+import {environment} from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideExperimentalZonelessChangeDetection(), provideRouter(routes)]
+  providers: [provideExperimentalZonelessChangeDetection(), provideRouter(routes), {
+    provide: "SocialAuthServiceConfig",
+    useValue: {
+      autoLogin: false,
+      lang: 'en',
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(environment.googleClientId)
+        }
+      ],
+      onError: (err) => console.error(err)
+    } as SocialAuthServiceConfig
+  }]
 };
