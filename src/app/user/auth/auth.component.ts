@@ -1,11 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {SupabaseService} from '../../supabase/supabase.service';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {GoogleSigninButtonDirective} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-auth',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleSigninButtonDirective
   ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
@@ -22,12 +24,14 @@ export class AuthComponent{
     email: '',
     password: '',
   })
-  constructor() {}
+  constructor() {
+    console.log('Auth-Component constructor fired');
+  }
   async onSubmit(): Promise<void> {
     try {
       this.loading = true
       const email = this.signInOtpForm.value.email as string
-      const { error } = await this.supabase.signInOtp(email)
+      const { error } = await this.supabase.signInWithOtp(email)
       if (error) throw error
       alert('Check your email for the login link!')
     } catch (error) {
@@ -41,12 +45,12 @@ export class AuthComponent{
   }
 
   async signUp(): Promise<void> {
-    const { error } = await this.supabase.signUp(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
+    const { error } = await this.supabase.signUpWithEmail(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
     if (error)
     console.error('Check your email and password!', error)
   }
   async signIn(): Promise<void> {
-    const { error } = await this.supabase.signIn(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
+    const { error } = await this.supabase.signInWithEmail(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
     if (error)
       console.error('Check your email and password!', error)
   }

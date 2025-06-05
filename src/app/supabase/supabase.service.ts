@@ -154,18 +154,24 @@ export class SupabaseService {
     return this.supabase.auth.onAuthStateChange(callback)
   }
 
-  signInOtp(email: string) {
+  signInWithGoogle(token: string) {
+    return this.supabase.auth.signInWithIdToken({
+      provider: 'google',
+      token: token,
+    })
+  }
+  signInWithOtp(email: string) {
     return this.supabase.auth.signInWithOtp({ email })
   }
 
-  signUp(email: string, password: string) {
+  signUpWithEmail(email: string, password: string) {
     return this.supabase.auth.signUp({
       email: email,
       password: password
     })
   }
 
-  signIn(email: string, password: string) {
+  signInWithEmail(email: string, password: string) {
     return this.supabase.auth.signInWithPassword({
       email: email,
       password: password
@@ -174,6 +180,16 @@ export class SupabaseService {
 
   signOut() {
     return this.supabase.auth.signOut()
+  }
+
+  createUser() {
+    return this.supabase.functions.invoke('create-user-on-signup', {
+      body: {
+        id: this._session?.user.id,
+        username: this._session?.user.user_metadata['name'],
+        email: this._session?.user?.email,
+      },
+    });
   }
 
   updateProfile(profile: Profile) {
