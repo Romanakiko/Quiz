@@ -24,7 +24,9 @@ export class AuthComponent{
     email: '',
     password: '',
   })
-  constructor() {}
+  constructor() {
+    console.log('Auth-Component constructor fired');
+  }
   async onSubmit(): Promise<void> {
     try {
       this.loading = true

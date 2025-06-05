@@ -182,6 +182,16 @@ export class SupabaseService {
     return this.supabase.auth.signOut()
   }
 
+  createUser() {
+    return this.supabase.functions.invoke('create-user-on-signup', {
+      body: {
+        id: this._session?.user.id,
+        username: this._session?.user.user_metadata['name'],
+        email: this._session?.user?.email,
+      },
+    });
+  }
+
   updateProfile(profile: Profile) {
     const update = {
       ...profile,
