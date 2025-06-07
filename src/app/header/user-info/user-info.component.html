@@ -1,0 +1,9 @@
+@if (session | async) {
+  <button matButton="tonal" (click)="openDialog()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
+    Sign In
+  </button>
+} @else {
+  <button matButton="tonal" (click)="openDialog()">Sign Out</button>
+  Hello, {{session | async }}
+}

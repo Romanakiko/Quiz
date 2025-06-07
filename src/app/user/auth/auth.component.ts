@@ -1,13 +1,28 @@
 import {Component, inject} from '@angular/core';
 import {SupabaseService} from '../../supabase/supabase.service';
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GoogleSigninButtonDirective} from "@abacritt/angularx-social-login";
+import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import {MatButton} from '@angular/material/button';
+import {MatError, MatFormField, MatHint, MatInput, MatLabel} from '@angular/material/input';
+import {AuthService} from './auth.service';
+import {MatDivider} from '@angular/material/divider';
 
 @Component({
   selector: 'app-auth',
   imports: [
     ReactiveFormsModule,
-    GoogleSigninButtonDirective
+    GoogleSigninButtonDirective,
+    MatDialogContent,
+    MatFormField,
+    MatDialogActions,
+    MatButton,
+    MatInput,
+    MatDialogTitle,
+    MatDivider,
+    MatError,
+    MatHint,
+    MatLabel
   ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
@@ -15,43 +30,26 @@ import {GoogleSigninButtonDirective} from "@abacritt/angularx-social-login";
 export class AuthComponent{
   private readonly supabase = inject(SupabaseService);
   private formBuilder = inject(FormBuilder);
+  readonly dialogRef = inject(MatDialogRef<AuthComponent>);
+  private authService = inject(AuthService);
 
-  loading = false
-  signInOtpForm = this.formBuilder.group({
-    email: '',
-  })
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   signInForm = this.formBuilder.group({
-    email: '',
-    password: '',
+    email: ['', Validators.required, Validators.email],
+    password: ['', Validators.required, Validators.minLength(6)]
   })
-  constructor() {
-    console.log('Auth-Component constructor fired');
-  }
-  async onSubmit(): Promise<void> {
-    try {
-      this.loading = true
-      const email = this.signInOtpForm.value.email as string
-      const { error } = await this.supabase.signInWithOtp(email)
-      if (error) throw error
-      alert('Check your email for the login link!')
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
-      }
-    } finally {
-      this.signInOtpForm.reset()
-      this.loading = false
-    }
-  }
+
+  constructor() {}
 
   async signUp(): Promise<void> {
-    const { error } = await this.supabase.signUpWithEmail(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
-    if (error)
-    console.error('Check your email and password!', error)
+    await this.authService.signUp(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
+    this.dialogRef.close();
   }
   async signIn(): Promise<void> {
-    const { error } = await this.supabase.signInWithEmail(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
-    if (error)
-      console.error('Check your email and password!', error)
+    await this.authService.signIn(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
+    this.dialogRef.close();
   }
 }

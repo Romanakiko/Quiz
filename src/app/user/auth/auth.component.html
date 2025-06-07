@@ -1,60 +1,38 @@
-<div class="row flex-center flex">
-  <div class="col-6 form-widget" aria-live="polite">
-    <p class="description">Sign in via magic link with email</p>
-    <form [formGroup]="signInOtpForm" (ngSubmit)="onSubmit()" class="form-widget">
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="emailOtp"
-          formControlName="email"
-          class="inputField"
-          type="email"
-          placeholder="Your email"
-        />
-      </div>
-      <div>
-        <button type="submit" class="button block" [disabled]="loading">
-          {{ loading ? 'Loading' : 'Send magic link' }}
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+<h2 mat-dialog-title>Sign in</h2>
+<mat-dialog-content class="dialog-content">
+  <p>Please sign-in</p>
+  <form [formGroup]="signInForm" class="dialog-form">
+    <mat-form-field class="dialog-form-field">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email"
+             placeholder="Ex. pat@example.com">
+      <mat-hint>Enter email here</mat-hint>
+      @if (signInForm.hasError('email') && !signInForm.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (signInForm.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
 
-<div class="row flex-center flex">
-  <div class="col-6 form-widget" aria-live="polite">
-    <p class="description">Auth with email and password</p>
-    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="form-widget">
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          formControlName="email"
-          class="inputField"
-          type="email"
-          placeholder="Your email"
-        />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input
-          id="password"
-          formControlName="password"
-          class="inputField"
-          type="password"
-          placeholder="Your pass"
-        />
-      </div>
-      <div>
-        <button type="button" class="button block" (click)="signUp()">
-          {{'Sign up'}}
-        </button>
-        <button type="button" class="button block" (click)="signIn()">
-          {{'Sign in'}}
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<asl-google-signin-button type='icon' size='medium'></asl-google-signin-button>
+    <mat-form-field class="dialog-form-field">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password"
+             placeholder="***">
+      <mat-hint>Enter password longer 6 symbols</mat-hint>
+      @if (signInForm.hasError('minLength') && !signInForm.hasError('required')) {
+        <mat-error>The password should be longer 6 symbols</mat-error>
+      }
+      @if (signInForm.hasError('required')) {
+        <mat-error>Password is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button matButton="outlined" (click)="signIn()">Sign In</button>
+  <asl-google-signin-button type='standard' shape="circle" theme="filled_blue" size='medium'></asl-google-signin-button>
+  <mat-divider></mat-divider>
+  <p>If you don't have an account yet:</p>
+  <button matButton="outlined" (click)="signUp()">Sign Up</button>
+</mat-dialog-actions>
