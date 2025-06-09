@@ -19,9 +19,10 @@ export class UserService implements OnDestroy{
         if(session.user)
         this.userInfo.set({
           id: session.user.id ?? "",
-          name: session.user.user_metadata['username'] ?? "",
+          name: session.user.user_metadata['name'] ?? "",
           email: session.user.email ?? ""
         });
+        console.log("Userinfo=",this.userInfo())
       } else {
         this.isLoggedIn.set(false);
       }
