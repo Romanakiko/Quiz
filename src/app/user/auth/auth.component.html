@@ -4,26 +4,24 @@
   <form [formGroup]="signInForm" class="dialog-form">
     <mat-form-field class="dialog-form-field">
       <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email"
-             placeholder="Ex. pat@example.com">
+      <input type="email" matInput formControlName="email">
       <mat-hint>Enter email here</mat-hint>
-      @if (signInForm.hasError('email') && !signInForm.hasError('required')) {
+      @if (email?.hasError('email')) {
         <mat-error>Please enter a valid email address</mat-error>
       }
-      @if (signInForm.hasError('required')) {
+      @if (email?.hasError('required')) {
         <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>
 
     <mat-form-field class="dialog-form-field">
       <mat-label>Password</mat-label>
-      <input type="password" matInput formControlName="password"
-             placeholder="***">
+      <input type="password" matInput formControlName="password">
       <mat-hint>Enter password longer 6 symbols</mat-hint>
-      @if (signInForm.hasError('minLength') && !signInForm.hasError('required')) {
+      @if (password?.hasError('minlength')) {
         <mat-error>The password should be longer 6 symbols</mat-error>
       }
-      @if (signInForm.hasError('required')) {
+      @if (password?.hasError('required')) {
         <mat-error>Password is <strong>required</strong></mat-error>
       }
     </mat-form-field>
