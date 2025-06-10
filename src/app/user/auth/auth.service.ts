@@ -1,4 +1,4 @@
-import {inject, Injectable, OnDestroy} from '@angular/core';
+import {inject, Injectable, OnDestroy, signal} from '@angular/core';
 import {SupabaseService} from '../../supabase/supabase.service';
 import {HeaderService} from '../../header/header.service';
 import {BehaviorSubject, Subscription} from 'rxjs';
@@ -13,17 +13,18 @@ export class AuthService implements OnDestroy {
   private headerService = inject(HeaderService);
   private googleAuthService = inject(SocialAuthService)
   private googleAuthSub: Subscription | null = null;
-  $session = new BehaviorSubject(this.supabaseService.session)
   private isLoggedIn = false
+
+  $session = new BehaviorSubject(this.supabaseService.session);
+  errorMessage = signal<string | null>(null);
 
   constructor() {
     this.supabaseService.authChanges((_, session) => {
       this.$session.next(session)
-      console.log('auth successfull', session)
       if(!session && !this.isLoggedIn) {
         this.googleAuthSub = this.googleAuthService.authState.subscribe((user) => {
           if(user) {
-            console.log('user state changed', user);
+            console.log('google-user state changed', user);
             this.signInWithGoogle(user.idToken);
           }
         });
@@ -39,9 +40,11 @@ export class AuthService implements OnDestroy {
       this.headerService.loading.set(true);
       const { error } = await this.supabaseService.signUpWithEmail(email, password);
       if (error) throw error;
+      this.signIn(email, password)
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
+        this.errorMessage.set(error.message);
       }
     } finally {
       this.headerService.loading.set(false);
@@ -54,9 +57,11 @@ export class AuthService implements OnDestroy {
       const { error } = await this.supabaseService.signInWithEmail(email, password);
       if (error) throw error;
       this.isLoggedIn = true;
+      this.errorMessage.set(null);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
+        this.errorMessage.set(error.message);
       }
     } finally {
       this.headerService.loading.set(false);
@@ -71,8 +76,12 @@ export class AuthService implements OnDestroy {
       await this.supabaseService.createUser();
       this.isLoggedIn = true;
       console.log('user auth in supabase succeed', data);
+      this.errorMessage.set(null);
     } catch (error) {
-      console.log('user auth in supabase get error', error);
+      if (error instanceof Error) {
+        console.log('user auth in supabase get error', error);
+        this.errorMessage.set(error.message);
+      }
     } finally {
       this.headerService.loading.set(false);
     }
@@ -86,9 +95,11 @@ export class AuthService implements OnDestroy {
       if (error) throw error;
       this.$session.next(null);
       this.isLoggedIn = false;
+      this.errorMessage.set(null);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
+        this.errorMessage.set(error.message);
       }
     } finally {
       this.headerService.loading.set(false);

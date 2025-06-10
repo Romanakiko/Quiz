@@ -7,6 +7,7 @@ import {MatError, MatFormField, MatHint, MatInput, MatLabel} from '@angular/mate
 import {AuthService} from './auth.service';
 import {MatDivider} from '@angular/material/divider';
 import {Subscription} from 'rxjs';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-auth',
@@ -31,8 +32,10 @@ export class AuthComponent implements OnInit, OnDestroy {
   private formBuilder = inject(FormBuilder);
   readonly dialogRef = inject(MatDialogRef<AuthComponent>);
   private authService = inject(AuthService);
+  authError = this.authService.errorMessage;
+  inputError: string | null = null;
   sessionSubscription: Subscription | null = null;
-  authDone = false;
+  formSubmitted = false;
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -49,22 +52,33 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sessionSubscription = this.authService.$session.subscribe(session => {
-      if (session && !this.authDone) {
+      if (session) {
         this.dialogRef.close();
       }
     })
     }
 
   signUp(): void {
-    this.authService.signUp(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
-    this.authDone = true;
+    if(!this.isFormInalid()) {
+      this.authService.signUp(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
+    }
+    this.formSubmitted = true;
     // this.dialogRef.close();
   }
 
   signIn(): void {
-    this.authService.signIn(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
-    this.authDone = true;
+    if(!this.isFormInalid()) {
+      this.authService.signIn(this.signInForm.value.email ?? '', this.signInForm.value.password ?? '')
+    }
+    this.formSubmitted = true;
     // this.dialogRef.close();
+  }
+
+  isFormInalid(): boolean {
+    return !!(this.email?.hasError('email')
+      || this.email?.hasError('required')
+      || this.password?.hasError('minlength')
+      || this.password?.hasError('required'))
   }
 
   ngOnDestroy(): void {

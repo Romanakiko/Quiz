@@ -1,6 +1,10 @@
 <h2 mat-dialog-title>Sign in</h2>
 <mat-dialog-content class="dialog-content">
-  <p>Please sign-in</p>
+  @if (formSubmitted && isFormInalid()) {
+    <mat-error>Email or password is incorrect!</mat-error>
+  } @else if (authError()) {
+  <mat-error>{{authError()}}</mat-error>
+}
   <form [formGroup]="signInForm" class="dialog-form">
     <mat-form-field class="dialog-form-field">
       <mat-label>Email</mat-label>
