@@ -1,7 +1,0 @@
-<div class="container" style="padding: 50px 0 100px 0">
-  @if (session | async) {
-    <app-user-page [session]="session | async"></app-user-page>
-  } @else {
-    <app-auth></app-auth>
-  }
-</div>
