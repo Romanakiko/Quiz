@@ -4,6 +4,11 @@
     Sign In
   </button>
 } @else {
-  <button matButton="tonal" (click)="signOut()">Sign Out</button>
-  Hello, {{user()?.name}}
+  <button matButton="tonal" [matMenuTriggerFor]="userActions">{{username()}}</button>
+  <mat-menu #userActions="matMenu">
+    <ng-template matMenuContent>
+    <button mat-menu-item (click)="signOut()">Sign out</button>
+    <button mat-menu-item>User page</button>
+    </ng-template>
+  </mat-menu>
 }
