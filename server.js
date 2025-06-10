@@ -1,17 +1,23 @@
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-//Install express server
-const express = require('express');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/quiz/browser'));
+// Serve static files from the Angular dist directory
+app.use(express.static(path.join(__dirname, 'dist/quiz/browser')));
 
-app.get('/*', function(req,res) {
-
-  res.sendFile(path.join(__dirname+'/dist/quiz/browser/index.html'));
+// For all GET requests, send back Angular's index.html file
+app.get('/*splat', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/quiz/browser/index.html'));
 });
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// Start the server on port 8080 or environment port
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
