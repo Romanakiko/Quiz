@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import {Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit, HostListener} from '@angular/core';
 import * as THREE from 'three';
 
 @Component({
@@ -8,6 +8,13 @@ import * as THREE from 'three';
 })
 export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('rendererContainer') rendererContainer!: ElementRef;
+  @HostListener('window:resize')
+  
+  onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
@@ -39,9 +46,9 @@ export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private initScene(): void {
     // Create star geometry with positions
     this.starGeometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(600 * 3); // 600 stars, 3 coordinates each
+    const positions = new Float32Array(6000 * 3); // 6000 stars, 3 coordinates each
 
-    for (let i = 0; i < 600; i++) {
+    for (let i = 0; i < 6000; i++) {
       const i3 = i * 3;
       positions[i3] = Math.random() * 600 - 300;     // x
       positions[i3 + 1] = Math.random() * 600 - 300; // y
@@ -75,14 +82,14 @@ export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
     const positions = this.starPositions;
     for (let i = 0; i < positions.length; i += 3) {
       // Move each star forward (negative Z direction in Three.js)
-      positions[i + 2] -= 0.5; // Adjust speed as needed
+      positions[i + 1] -= 0.5; // Adjust speed as needed
 
       // If star moves past camera, reset it to the back
-      if (positions[i + 2] < -300) {
-        positions[i + 2] = 300;
+      if (positions[i + 1] < -300) {
+        positions[i + 1] = 300;
         // Optional: Randomize x and y when resetting
         positions[i] = Math.random() * 600 - 300;
-        positions[i + 1] = Math.random() * 600 - 300;
+        positions[i + 2] = Math.random() * 600 - 300;
       }
     }
 
