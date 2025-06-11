@@ -1,5 +1,6 @@
 import {Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit, HostListener} from '@angular/core';
-import * as THREE from 'three';
+import { Scene, PerspectiveCamera, WebGLRenderer, Points, BufferGeometry,
+  PointsMaterial, TextureLoader, BufferAttribute } from 'three';
 
 @Component({
   selector: 'app-main-page',
@@ -9,20 +10,20 @@ import * as THREE from 'three';
 export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('rendererContainer') rendererContainer!: ElementRef;
   @HostListener('window:resize')
-  
+
   onWindowResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
-  renderer!: THREE.WebGLRenderer;
-  stars!: THREE.Points;
+  scene = new Scene();
+  camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+  renderer!: WebGLRenderer;
+  stars!: Points;
   animationId!: number;
   starPositions!: Float32Array;
-  starGeometry!: THREE.BufferGeometry;
+  starGeometry!: BufferGeometry;
 
   constructor() {
     this.camera.position.z = 1;
@@ -45,7 +46,7 @@ export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initScene(): void {
     // Create star geometry with positions
-    this.starGeometry = new THREE.BufferGeometry();
+    this.starGeometry = new BufferGeometry();
     const positions = new Float32Array(6000 * 3); // 6000 stars, 3 coordinates each
 
     for (let i = 0; i < 6000; i++) {
@@ -55,22 +56,22 @@ export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
       positions[i3 + 2] = Math.random() * 600 - 300; // z
     }
 
-    this.starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    this.starGeometry.setAttribute('position', new BufferAttribute(positions, 3));
     this.starPositions = positions; // Store reference for animation
 
-    const sprite = new THREE.TextureLoader().load('assets/star.png');
-    const starMaterial = new THREE.PointsMaterial({
+    const sprite = new TextureLoader().load('assets/star.png');
+    const starMaterial = new PointsMaterial({
       color: 0xaaaaaa,
       size: 0.7,
       map: sprite,
     });
 
-    this.stars = new THREE.Points(this.starGeometry, starMaterial);
+    this.stars = new Points(this.starGeometry, starMaterial);
     this.scene.add(this.stars);
   }
 
   private initRenderer(): void {
-    this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.rendererContainer.nativeElement.appendChild(this.renderer.domElement);
   }
