@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import cors from 'cors'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,6 +23,22 @@ app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
   next();
 });
+
+
+// Configure CORS
+const corsOptions = {
+    origin: ['https://quiz-2b5f.onrender.com'],
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE'
+    ], // Allowed methods
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization'], // Allowed headers
+  };
+app.use(cors(corsOptions));
 
 // Start the server on port 8080 or environment port
 app.listen(PORT, () => {
