@@ -5,12 +5,12 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/main',
+    redirectTo: '/welcome',
   },
   {
-    path: 'main',
+    path: 'welcome',
     pathMatch: 'full',
-    component: MainPageComponent
+    loadComponent: () => import('./main-page/main-page.component').then(m => m.MainPageComponent),
   }
   // {
   //     path: 'main',
