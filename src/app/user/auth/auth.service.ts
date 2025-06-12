@@ -73,7 +73,6 @@ export class AuthService implements OnDestroy {
       this.headerService.loading.set(true);
       const { data, error } = await this.supabaseService.signInWithGoogle(token);
       if (error) throw error;
-      await this.supabaseService.createUser();
       this.isLoggedIn = true;
       console.log('user auth in supabase succeed', data);
       this.errorMessage.set(null);

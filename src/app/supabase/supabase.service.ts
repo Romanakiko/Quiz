@@ -8,6 +8,7 @@ import {
   User,
 } from '@supabase/supabase-js'
 import { environment} from '../../environments/environment';
+import {IUser} from '../user/user';
 
 export interface Profile {
   id?: string
@@ -85,10 +86,14 @@ export class SupabaseService {
     return this.supabase.functions.invoke('create-user-on-signup', {
       body: {
         id: this._session?.user.id,
-        Name: this._session?.user.user_metadata['name'],
+        name: this._session?.user.user_metadata['name'] ?? '',
         email: this._session?.user?.email,
       },
     });
+  }
+
+  async getUser(): Promise<{ data: IUser | null; error: any }> {
+    return this.supabase.from('User').select('*').single();
   }
 
   updateProfile(profile: Profile) {
