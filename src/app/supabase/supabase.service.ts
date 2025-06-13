@@ -83,11 +83,12 @@ export class SupabaseService {
   }
 
   createUser() {
+    let session = this.session;
     return this.supabase.functions.invoke('create-user-on-signup', {
       body: {
-        id: this._session?.user.id,
-        name: this._session?.user.user_metadata['name'] ?? '',
-        email: this._session?.user?.email,
+        id: session?.user.id,
+        name: session?.user.user_metadata['name'] ?? '',
+        email: session?.user?.email,
       },
     });
   }
