@@ -29,7 +29,7 @@ export class UserService implements OnDestroy{
     })
   }
 
-  private async getUser(): Promise<void> {
+  private async getUser(retry: boolean = true): Promise<void> {
     try {
       this.headerService.loading.set(true);
       const { data, error }: { data: IUser | null; error: any } = await this.supabaseService.getUser();
@@ -39,6 +39,9 @@ export class UserService implements OnDestroy{
     } catch (error) {
       console.log("UserError=", error);
       await this.createUser();
+      if(retry) {
+        await this.getUser(false);
+      }
       if (error instanceof Error) {
         console.error(error.message);
       }
