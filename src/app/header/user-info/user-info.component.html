@@ -8,7 +8,7 @@
   <mat-menu #userActions="matMenu">
     <ng-template matMenuContent>
     <button mat-menu-item (click)="signOut()">Sign out</button>
-    <button mat-menu-item>User page</button>
+    <button mat-menu-item (click)="openUserDetails()">User details</button>
     </ng-template>
   </mat-menu>
 }

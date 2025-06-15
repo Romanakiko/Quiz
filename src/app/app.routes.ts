@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import {MainPageComponent} from './main-page/main-page.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'welcome',
     pathMatch: 'full',
-    loadComponent: () => import('./main-page/main-page.component').then(m => m.MainPageComponent),
+    loadComponent: () => import('./pages/main-page/main-page.component').then(m => m.MainPageComponent),
   }
   // {
   //     path: 'main',
