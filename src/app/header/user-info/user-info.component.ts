@@ -9,6 +9,7 @@ import {MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger} from '@angular/mat
 import {RouterLink} from '@angular/router';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {UserDetailsComponent} from '../../user/user-details/user-details.component';
+import {AvatarComponent} from '../../ui/avatar/avatar.component';
 
 @Component({
   selector: 'app-user-info',
@@ -18,7 +19,8 @@ import {UserDetailsComponent} from '../../user/user-details/user-details.compone
     MatMenuTrigger,
     MatMenu,
     MatMenuItem,
-    MatMenuContent
+    MatMenuContent,
+    AvatarComponent
   ],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.scss'

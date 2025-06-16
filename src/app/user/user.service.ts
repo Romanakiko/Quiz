@@ -64,6 +64,16 @@ export class UserService implements OnDestroy{
     }
   }
 
+  optimisticUpdateAvatar(avatar: string): void {
+    this.userInfo.update(user => ({
+      avatar: avatar,
+      email: user?.email ?? "",
+      name: user?.name ?? "",
+      createdAt: user?.createdAt ?? new Date(),
+      id: user?.id ?? ""
+    }))
+  }
+
   ngOnDestroy(): void {
         this.sessionSubscription?.unsubscribe();
     }

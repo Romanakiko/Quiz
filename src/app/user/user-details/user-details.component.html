@@ -1,21 +1,24 @@
 <div class="user-info">
 
-  <div class="info-block">
-    <div class="info-block-avatar">
-    @if(userInfo()?.avatar && userInfo()?.avatar !== '') {
-      <img [src]="userInfo()?.avatar" class="info-block-avatar_image">
-    } @else {
-      <span class="info-block-avatar_text">{{userInfo()?.name && userInfo()?.name !== '' ? userInfo()?.name?.slice(0,1) : '?'}}</span>
-    }
-    </div>
-  </div>
+  <input
+    #flinpt
+    type="file"
+    accept="image/*"
+    class="file-input"
+    (change)="onFileSelected($event)">
+
+  <app-avatar
+    (click)="flinpt.click()"
+    [size]="40"
+    [user]="userInfo()"
+    [editable]="true"/>
 
   <div class="info-block">
     <label>Email:</label>
     <p>{{userInfo()?.email}}</p>
   </div>
 
-  <div class="info-block">
+  <div class="info-block editable">
     <label>Name:</label>
     <p>{{userInfo()?.name}}</p>
   </div>

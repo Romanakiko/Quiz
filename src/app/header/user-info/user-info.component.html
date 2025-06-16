@@ -1,10 +1,13 @@
 @if (!isLoggedIn()) {
   <button matButton="tonal" (click)="openDialog()">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
+    <mat-icon aria-hidden="false" aria-label="SignIn icon" fontIcon="account_circle"></mat-icon>
     Sign In
   </button>
 } @else {
-  <button matButton="tonal" [matMenuTriggerFor]="userActions">{{username()}}</button>
+  <button matButton="tonal" [matMenuTriggerFor]="userActions">
+    <app-avatar [size]="15" [user]="user()"/>
+    {{username()}}
+  </button>
   <mat-menu #userActions="matMenu">
     <ng-template matMenuContent>
     <button mat-menu-item (click)="signOut()">Sign out</button>

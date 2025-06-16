@@ -3,37 +3,23 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 40px;
-  background: var(--mat-sys-surface-container);
   color: var(--mat-sys-primary);
 
   .info-block {
+    padding: 0 12px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 30px;
+  }
 
-    &-avatar {
-      height: 50px;
-      width: 50px;
-      background: var(--mat-sys-tertiary-container);
-      border-radius: 50%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--mat-sys-tertiary);
+  .editable {
+    background: var(--mat-sys-surface-container);
+  }
 
-      &_image {
-        object-fit: cover;
-      }
-      &_text {
-        font-weight: bold;
-        text-transform: uppercase;
-        user-select: none;
-      }
-    }
+  .file-input {
+    display: none;
   }
 }
