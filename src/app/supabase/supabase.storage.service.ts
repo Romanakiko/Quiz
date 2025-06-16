@@ -41,7 +41,7 @@ export class SupabaseStorageService {
         await this.supabaseService.deleteOldAvatar(user.avatar);
       }
 
-      this.userService.optimisticUpdateAvatar(newAvatarUrl);
+      await this.userService.optimisticUpdateAvatar(newAvatarUrl);
 
     } catch (error: any) {
       this.errorMessage.set("Uploading failed");

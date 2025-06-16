@@ -16,6 +16,8 @@
 
     &_image {
       object-fit: cover;
+      width: -webkit-fill-available;
+      transform: scale(1.5);
     }
     &_text {
       font-weight: bold;

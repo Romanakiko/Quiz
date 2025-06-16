@@ -97,13 +97,12 @@ export class SupabaseService {
     return this.supabase.from('User').select('*').single();
   }
 
-  updateProfile(profile: Profile) {
-    const update = {
-      ...profile,
-      updated_at: new Date(),
-    }
-
-    return this.supabase.from('profiles').upsert(update)
+  async updateProfile(userId: string, updates: Partial<IUser>) {
+    return this.supabase
+      .from('User')
+      .update(updates)
+      .eq('id', userId)
+      .select();
   }
 
   downLoadImage(path: string) {
