@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  color: var(--mat-sys-primary);
+
+  .info-block {
+    padding: 0 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .editable {
+    background: var(--mat-sys-surface-container);
+  }
+
+  .file-input {
+    display: none;
+  }
+}

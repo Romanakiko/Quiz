@@ -64,6 +64,20 @@ export class UserService implements OnDestroy{
     }
   }
 
+  async optimisticUpdateAvatar(avatar: string) {
+    this.userInfo.update(user => ({
+      avatar: avatar,
+      email: user?.email ?? "",
+      name: user?.name ?? "",
+      createdAt: user?.createdAt ?? new Date(),
+      id: user?.id ?? ""
+    }))
+    if(this.userInfo()?.id && this.userInfo()?.id !== "") {
+      const user = await this.supabaseService.updateProfile(this.userInfo()?.id!, {avatar: this.userInfo()?.avatar});
+      console.log('New user data: ', user);
+    }
+  }
+
   ngOnDestroy(): void {
         this.sessionSubscription?.unsubscribe();
     }

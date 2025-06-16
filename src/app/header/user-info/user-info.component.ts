@@ -6,6 +6,10 @@ import {AuthComponent} from '../../user/auth/auth.component';
 import {AuthService} from '../../user/auth/auth.service';
 import {UserService} from '../../user/user.service';
 import {MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {RouterLink} from '@angular/router';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {UserDetailsComponent} from '../../user/user-details/user-details.component';
+import {AvatarComponent} from '../../ui/avatar/avatar.component';
 
 @Component({
   selector: 'app-user-info',
@@ -15,7 +19,8 @@ import {MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger} from '@angular/mat
     MatMenuTrigger,
     MatMenu,
     MatMenuItem,
-    MatMenuContent
+    MatMenuContent,
+    AvatarComponent
   ],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.scss'
@@ -25,6 +30,7 @@ export class UserInfoComponent {
   readonly dialog = inject(MatDialog);
   private userService = inject(UserService);
   private authService = inject(AuthService);
+  private _bottomSheet = inject(MatBottomSheet);
 
   isLoggedIn = this.userService.isLoggedIn;
   user = this.userService.userInfo;
@@ -40,6 +46,11 @@ export class UserInfoComponent {
       // }
     });
 
+  }
+
+
+  openUserDetails(): void {
+    this._bottomSheet.open(UserDetailsComponent);
   }
 
    signOut(): void {

@@ -26,7 +26,7 @@ type CustomLockFunc = () => Promise<CustomLock>;
   providedIn: 'root',
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  protected supabase: SupabaseClient;
   _session: AuthSession | null = null;
 
   constructor() {
@@ -97,20 +97,42 @@ export class SupabaseService {
     return this.supabase.from('User').select('*').single();
   }
 
-  updateProfile(profile: Profile) {
-    const update = {
-      ...profile,
-      updated_at: new Date(),
-    }
-
-    return this.supabase.from('profiles').upsert(update)
+  async updateProfile(userId: string, updates: Partial<IUser>) {
+    return this.supabase
+      .from('User')
+      .update(updates)
+      .eq('id', userId)
+      .select();
   }
 
   downLoadImage(path: string) {
     return this.supabase.storage.from('avatars').download(path)
   }
 
-  uploadAvatar(filePath: string, file: File) {
-    return this.supabase.storage.from('avatars').upload(filePath, file)
+  async uploadAvatar(userId: string, file: File): Promise<string> {
+    const filePath = `avatars/${userId}/${Date.now()}_${file.name}`;
+
+    const { data, error } = await this.supabase.storage
+      .from('avatars')
+      .upload(filePath, file);
+
+    if (error) throw error;
+
+    return this.getPublicUrl(data.path);
+  }
+
+  getPublicUrl(path: string): string {
+    const { data } = this.supabase.storage
+      .from('avatars')
+      .getPublicUrl(path);
+
+    return data.publicUrl;
+  }
+
+  async deleteOldAvatar(fullUrl: string): Promise<void> {
+    const path = fullUrl.split('/avatars/')[1];
+    await this.supabase.storage
+      .from('avatars')
+      .remove([path]);
   }
 }

@@ -1,0 +1,51 @@
+:host {
+  display: inline-block;
+
+  .avatar {
+    padding: 4px;
+    background: var(--mat-sys-tertiary-container);
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--mat-sys-tertiary);
+    box-shadow: 0 2px 4px var(--mat-sys-surface-container-low);
+    //border: 1px solid var(--mat-sys-outline);
+
+    &_image {
+      object-fit: cover;
+      width: -webkit-fill-available;
+      transform: scale(1.5);
+    }
+    &_text {
+      font-weight: bold;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    &_edit {
+      position: absolute;
+      z-index: 2;
+      border-radius: 50%;
+      padding: 4px;
+      background: var(--mat-sys-surface-container);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.9);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    &:hover {
+      .avatar_edit {
+        opacity: 0.8;
+        transform: scale(1);
+        cursor: pointer;
+      }
+    }
+  }
+}

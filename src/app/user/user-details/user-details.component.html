@@ -1,0 +1,26 @@
+<div class="user-info">
+
+  <input
+    #flinpt
+    type="file"
+    accept="image/*"
+    class="file-input"
+    (change)="onFileSelected($event)">
+
+  <app-avatar
+    (click)="flinpt.click()"
+    [size]="40"
+    [user]="userInfo()"
+    [editable]="true"/>
+
+  <div class="info-block">
+    <label>Email:</label>
+    <p>{{userInfo()?.email}}</p>
+  </div>
+
+  <div class="info-block editable">
+    <label>Name:</label>
+    <p>{{userInfo()?.name}}</p>
+  </div>
+</div>
+
