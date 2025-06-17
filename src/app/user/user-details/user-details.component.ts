@@ -36,7 +36,7 @@ export class UserDetailsComponent {
     source: this.supabaseStorageService.errorMessage,
     computation: (message) => {
       if(message && message !== "") {
-          this._snackBar.open(message);
+          this._snackBar.open(message, "ok");
       }
       return message;
 }
