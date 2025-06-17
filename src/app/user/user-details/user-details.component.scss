@@ -17,6 +17,36 @@
 
   .editable {
     background: var(--mat-sys-surface-container);
+    opacity: 1;
+
+    &__input {
+      padding: 16px 0;
+      border-radius: 4px;
+      background: var(--mat-sys-surface-container-highest);
+      color: var(--mat-sys-tertiary);
+      border: none;
+      font-family: var(--mat-bottom-sheet-container-text-font, var(--mat-sys-body-large-font)), sans-serif;
+      font-size: var(--mat-bottom-sheet-container-text-size, var(--mat-sys-body-large-size));
+      line-height: var(--mat-bottom-sheet-container-text-line-height, var(--mat-sys-body-large-line-height));
+      font-weight: var(--mat-bottom-sheet-container-text-weight, var(--mat-sys-body-large-weight));
+    }
+
+    &__icon-edit {
+      cursor: pointer;
+      display: none;
+    }
+
+    &__icon-submit:hover {
+      cursor: pointer;
+    }
+
+    &:hover {
+      opacity: 0.7;
+
+      .editable__icon-edit {
+        display: inline-block;
+      }
+    }
   }
 
   .file-input {

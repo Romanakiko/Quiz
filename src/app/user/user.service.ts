@@ -65,6 +65,7 @@ export class UserService implements OnDestroy{
   }
 
   async optimisticUpdateAvatar(avatar: string) {
+    this.headerService.loading.set(true);
     this.userInfo.update(user => ({
       avatar: avatar,
       email: user?.email ?? "",
@@ -76,6 +77,23 @@ export class UserService implements OnDestroy{
       const user = await this.supabaseService.updateProfile(this.userInfo()?.id!, {avatar: this.userInfo()?.avatar});
       console.log('New user data: ', user);
     }
+    this.headerService.loading.set(false);
+  }
+
+  async optimisticUpdateName(name: string) {
+    this.headerService.loading.set(true);
+    this.userInfo.update(user => ({
+      avatar: user?.avatar ?? "",
+      email: user?.email ?? "",
+      name: name,
+      createdAt: user?.createdAt ?? new Date(),
+      id: user?.id ?? ""
+    }))
+    if(this.userInfo()?.id && this.userInfo()?.id !== "") {
+      const user = await this.supabaseService.updateProfile(this.userInfo()?.id!, {name: this.userInfo()?.name});
+      console.log('New user data: ', user);
+    }
+    this.headerService.loading.set(false);
   }
 
   ngOnDestroy(): void {
