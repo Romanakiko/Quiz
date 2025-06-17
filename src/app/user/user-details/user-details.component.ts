@@ -1,4 +1,4 @@
-import {Component, computed, inject, linkedSignal, Signal} from '@angular/core';
+import {Component, computed, inject, linkedSignal, signal, Signal} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatMenu, MatMenuContent, MatMenuItem} from "@angular/material/menu";
 import {UserService} from '../user.service';
@@ -7,11 +7,16 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {AvatarComponent} from '../../ui/avatar/avatar.component';
 import {SupabaseStorageService} from '../../supabase/supabase.storage.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatIcon} from "@angular/material/icon";
+import {MatInput} from "@angular/material/input";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-user-details',
   imports: [
-    AvatarComponent
+    AvatarComponent,
+    MatIcon,
+    MatInput,
   ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss'
@@ -22,6 +27,10 @@ export class UserDetailsComponent {
   private supabaseStorageService = inject(SupabaseStorageService);
   private _bottomSheetRef =
     inject<MatBottomSheetRef<UserDetailsComponent>>(MatBottomSheetRef);
+
+  userInfo: Signal<IUser | null> = computed(this.userService.userInfo);
+  editName = signal<boolean>(false);
+  emailFormControl = new FormControl(this.userInfo()?.name);
   errors = linkedSignal({
     source: this.supabaseStorageService.errorMessage,
     computation: (message) => {
@@ -36,5 +45,12 @@ export class UserDetailsComponent {
     this.supabaseStorageService.ChangeAvatar(event).then(r => {});
   }
 
-  userInfo: Signal<IUser | null> = computed(this.userService.userInfo);
+  changeName() {
+
+  }
+
+  toggleEditName() {
+    this.editName.update(value => !value);
+  }
+
 }
