@@ -8,8 +8,8 @@ import {AvatarComponent} from '../../ui/avatar/avatar.component';
 import {SupabaseStorageService} from '../../supabase/supabase.storage.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
-import {FormControl} from "@angular/forms";
+import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-user-details',
@@ -17,6 +17,7 @@ import {FormControl} from "@angular/forms";
     AvatarComponent,
     MatIcon,
     MatInput,
+    ReactiveFormsModule
   ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss'
@@ -30,7 +31,7 @@ export class UserDetailsComponent {
 
   userInfo: Signal<IUser | null> = computed(this.userService.userInfo);
   editName = signal<boolean>(false);
-  emailFormControl = new FormControl(this.userInfo()?.name);
+  nameFormControl = new FormControl(this.userInfo()?.name);
   errors = linkedSignal({
     source: this.supabaseStorageService.errorMessage,
     computation: (message) => {
@@ -41,16 +42,17 @@ export class UserDetailsComponent {
 }
   })
 
-  onFileSelected(event: Event) {
-    this.supabaseStorageService.ChangeAvatar(event).then(r => {});
+  async onFileSelected(event: Event) {
+    await this.supabaseStorageService.ChangeAvatar(event);
   }
 
-  changeName() {
-
+  async changeName() {
+    await this.userService.optimisticUpdateName(this.nameFormControl.value ?? "");
+    this.editName.set(false);
   }
 
-  toggleEditName() {
-    this.editName.update(value => !value);
+  enableEditName() {
+    this.editName.set(true);
   }
 
 }
