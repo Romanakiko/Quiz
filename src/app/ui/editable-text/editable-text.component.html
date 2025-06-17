@@ -1,0 +1,25 @@
+@if((!_value() || _value() === '') && !isEditable()) {
+  <mat-icon
+    (click)="enableEdit()"
+    class="editable__icon-edit no-value"
+    aria-hidden="false"
+    aria-label="edit icon"
+    fontIcon="edit"/>
+} @else if(isEditable()) {
+  <input class="editable__input" matInput maxlength="256" (submit)="submitValue()" [formControl]="nameFormControl">
+
+  <mat-icon
+    class="editable__icon-submit"
+    aria-hidden="false"
+    aria-label="edit icon"
+    fontIcon="check"
+    (click)="submitValue()"/>
+} @else {
+  <p>{{_value()}}</p>
+  <mat-icon
+    (click)="enableEdit()"
+    class="editable__icon-edit"
+    aria-hidden="false"
+    aria-label="edit icon"
+    fontIcon="edit"/>
+}

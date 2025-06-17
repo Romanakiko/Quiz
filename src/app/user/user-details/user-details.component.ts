@@ -7,17 +7,13 @@ import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {AvatarComponent} from '../../ui/avatar/avatar.component';
 import {SupabaseStorageService} from '../../supabase/supabase.storage.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatIcon} from "@angular/material/icon";
-import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {EditableTextComponent} from "../../ui/editable-text/editable-text.component";
 
 @Component({
   selector: 'app-user-details',
   imports: [
     AvatarComponent,
-    MatIcon,
-    MatInput,
-    ReactiveFormsModule
+    EditableTextComponent
   ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss'
@@ -30,8 +26,6 @@ export class UserDetailsComponent {
     inject<MatBottomSheetRef<UserDetailsComponent>>(MatBottomSheetRef);
 
   userInfo: Signal<IUser | null> = computed(this.userService.userInfo);
-  editName = signal<boolean>(false);
-  nameFormControl = new FormControl(this.userInfo()?.name);
   errors = linkedSignal({
     source: this.supabaseStorageService.errorMessage,
     computation: (message) => {
@@ -46,13 +40,8 @@ export class UserDetailsComponent {
     await this.supabaseStorageService.ChangeAvatar(event);
   }
 
-  async changeName() {
-    await this.userService.optimisticUpdateName(this.nameFormControl.value ?? "");
-    this.editName.set(false);
-  }
-
-  enableEditName() {
-    this.editName.set(true);
+  async changeName(name: string) {
+    await this.userService.optimisticUpdateName(name);
   }
 
 }
