@@ -10,6 +10,11 @@ export const routes: Routes = [
     path: 'welcome',
     pathMatch: 'full',
     loadComponent: () => import('./pages/main-page/main-page.component').then(m => m.MainPageComponent),
+  },
+  {
+    path: 'lobby',
+    pathMatch: 'full',
+    loadChildren: () => import('./pages/lobby/lobby.routes').then(m => m.routes),
   }
   // {
   //     path: 'main',
