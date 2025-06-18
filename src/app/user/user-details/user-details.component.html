@@ -18,21 +18,11 @@
     <p>{{userInfo()?.email}}</p>
   </div>
 
-  <div class="info-block editable" (click)="enableEditName()">
+  <div class="info-block editable">
     <label>Name:</label>
-      @if(editName()) {
-          <input class="editable__input" matInput maxlength="256" (submit)="changeName()" [formControl]="nameFormControl">
-
-          <mat-icon
-                  class="editable__icon-submit"
-                  aria-hidden="false"
-                  aria-label="edit icon"
-                  fontIcon="check"
-                  (click)="changeName()"/>
-      } @else {
-          <mat-icon class="editable__icon-edit" aria-hidden="false" aria-label="edit icon" fontIcon="edit"></mat-icon>
-          <p>{{userInfo()?.name}}</p>
-      }
+      <app-editable-text
+      [value]="userInfo()?.name"
+      (value)="changeName($event)"/>
   </div>
 </div>
 
