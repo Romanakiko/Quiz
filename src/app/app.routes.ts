@@ -15,14 +15,14 @@ export const routes: Routes = [
     path: 'lobby',
     pathMatch: 'full',
     loadChildren: () => import('./pages/lobby/lobby.routes').then(m => m.routes),
-  }
+  },
+  {
+    path: '**',
+    redirectTo: 'welcome',
+  },
   // {
   //     path: 'main',
   //     pathMatch: 'full',
   //     loadChildren: () => import('./user/user.routes').then(mod => mod.routes),
-  // },
-  // {
-  //   path: '*',
-  //   redirectTo: '',
   // },
 ];
