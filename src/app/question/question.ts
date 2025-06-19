@@ -1,11 +1,14 @@
 export interface Question {
-    id: string,
-    text: string,
-    options: QuestionOption[],
-    multiple: boolean
+  id: string,
+  text: string,
+  image: string,
+  weight: number,
+  options: QuestionOption[],
+  multiple: boolean,
+  folder_id: string
 }
 
 export interface QuestionOption {
-    text: string,
-    
+  text: string,
+  image: string,
 }
