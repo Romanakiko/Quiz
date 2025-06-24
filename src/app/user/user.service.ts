@@ -12,12 +12,12 @@ export class UserService implements OnDestroy{
 
   private headerService = inject(HeaderService);
   private supabaseService = inject(SupabaseService);
+  private authService = inject(AuthService);
 
   isLoggedIn = signal<boolean>(false);
   userInfo = signal<IUser | null>(null);
   private sessionSubscription: Subscription | null = null;
 
-  authService = inject(AuthService);
   constructor() {
     this.sessionSubscription = this.authService.$session.subscribe(session => {
       if (session) {
