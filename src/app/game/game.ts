@@ -2,6 +2,7 @@ export interface Game {
   id: string,
   name: string,
   owner_id: string,
+  created_at: Date,
   status: GameStatus,
   type: GameTypes,
   description?: string,
