@@ -10,17 +10,7 @@ import {
 import { environment} from '../../environments/environment';
 import {IUser} from '../user/user';
 
-export interface Profile {
-  id?: string
-  username: string
-  website: string
-  avatar_url: string
-}
-interface CustomLock {
-  acquire(name: string): Promise<() => void>;
-}
-
-type CustomLockFunc = () => Promise<CustomLock>;
+export type DataTables = 'Answers' | 'Folder' | 'Game' | 'Options' | 'Questions' | 'Questions_in_game' | 'Users_in_game';
 
 @Injectable({
   providedIn: 'root',
@@ -134,5 +124,12 @@ export class SupabaseService {
     await this.supabase.storage
       .from('avatars')
       .remove([path]);
+  }
+
+  async getOwnRows(email: string, table: DataTables) {
+    return this.supabase
+      .from(table)
+      .select('*')
+      .eq('email', email)
   }
 }
