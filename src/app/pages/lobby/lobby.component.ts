@@ -12,6 +12,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {Folder} from '../../folder/folder';
+import {FolderService} from '../../folder/folder.service';
+import {GameService} from '../../game/game.service';
 
 @Component({
   selector: 'app-lobby',
@@ -36,6 +38,7 @@ import {Folder} from '../../folder/folder';
     MatHeaderRow,
     MatRow
   ],
+  providers: [FolderService, GameService],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss'
 })
