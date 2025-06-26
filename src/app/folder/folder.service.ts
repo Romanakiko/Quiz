@@ -5,16 +5,16 @@ import {Folder} from './folder';
 import {SupabaseService} from '../supabase/supabase.service';
 import {UserService} from '../user/user.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FolderService {
 
   private headerService = inject(HeaderService);
   private supabaseService = inject(SupabaseService);
   private userService = inject(UserService);
 
-  constructor() { }
+  constructor() {
+    this.getFolders().then(folders => {})
+  }
 
   userFolders = signal<Folder[] | null>(null);
 
