@@ -16,7 +16,7 @@ export class GameService {
     this.getGames().then(games => {});
   }
 
-  userFolders = signal<Folder[] | null>(null);
+  userGames = signal<Folder[] | null>(null);
 
   private async getGames(): Promise<void> {
     try {
@@ -24,7 +24,7 @@ export class GameService {
       const { data, error } = await this.supabaseService.getOwnRows(this.userService.userInfo()?.email ?? '', 'Game');
       if (error) throw error;
 
-      this.userFolders.set(
+      this.userGames.set(
         data?.map(element => ({
           id: element.id,
           name: element.full_name || '',
@@ -40,7 +40,7 @@ export class GameService {
           standalone: element.standalone,
         }))
       );
-      console.log("(FolderService) UserFolders=", this.userFolders());
+      console.log("(FolderService) UserFolders=", this.userGames());
     } catch (error) {
       console.log("FolderError=", error);
       if (error instanceof Error) {
