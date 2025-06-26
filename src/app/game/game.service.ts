@@ -5,16 +5,16 @@ import {UserService} from '../user/user.service';
 import {Folder} from '../folder/folder';
 import {GameStatus, GameTypes} from './game';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class GameService {
 
   private headerService = inject(HeaderService);
   private supabaseService = inject(SupabaseService);
   private userService = inject(UserService);
 
-  constructor() { }
+  constructor() {
+    this.getGames().then(games => {});
+  }
 
   userFolders = signal<Folder[] | null>(null);
 
