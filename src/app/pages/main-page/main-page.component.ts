@@ -1,13 +1,23 @@
-import {Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit, HostListener} from '@angular/core';
+import {Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit, HostListener, inject} from '@angular/core';
 import { Scene, PerspectiveCamera, WebGLRenderer, Points, BufferGeometry,
   PointsMaterial, TextureLoader, BufferAttribute } from 'three';
+import {UserService} from '../../user/user.service';
+import {MatButton} from '@angular/material/button';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
+  imports: [
+    MatButton,
+    RouterLink
+  ],
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  private userService = inject(UserService);
+  loggedIn = this.userService.isLoggedIn();
+
   @ViewChild('rendererContainer') rendererContainer!: ElementRef;
   @HostListener('window:resize')
 

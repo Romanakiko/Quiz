@@ -3,12 +3,14 @@ import {MatIcon} from '@angular/material/icon';
 import {FolderService} from '../../folder/folder.service';
 import {GameService} from '../../game/game.service';
 import {TableComponent} from '../../ui/table/table.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-lobby',
   imports: [
     MatIcon,
-    TableComponent
+    TableComponent,
+    RouterLink
   ],
   providers: [FolderService, GameService],
   templateUrl: './lobby.component.html',

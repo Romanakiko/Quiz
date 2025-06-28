@@ -14,7 +14,6 @@ export const routes: Routes = [
   },
   {
     path: 'lobby',
-    pathMatch: 'full',
     canActivate: [authorizedGuard],
     loadChildren: () => import('./pages/lobby/lobby.routes').then(m => m.routes),
   },
