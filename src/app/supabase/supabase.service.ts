@@ -9,8 +9,12 @@ import {
 } from '@supabase/supabase-js'
 import { environment} from '../../environments/environment';
 import {IUser} from '../user/user';
+import {Folder} from '../folder/folder';
+import {Game} from '../game/game';
 
 export type DataTables = 'Answers' | 'Folder' | 'Game' | 'Options' | 'Questions' | 'Questions_in_game' | 'Users_in_game';
+export type DataTypes = Folder | Game;
+export type DataTypeArray = Folder[] | Game[];
 
 @Injectable({
   providedIn: 'root',
