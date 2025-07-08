@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import {authorizedGuard} from './user/authorized.guard';
 
 export const routes: Routes = [
   {
@@ -13,12 +14,12 @@ export const routes: Routes = [
   },
   {
     path: 'lobby',
-    pathMatch: 'full',
+    canActivate: [authorizedGuard],
     loadChildren: () => import('./pages/lobby/lobby.routes').then(m => m.routes),
   },
   {
     path: '**',
-    redirectTo: 'welcome',
+    redirectTo: '/welcome',
   },
   // {
   //     path: 'main',

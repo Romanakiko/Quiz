@@ -4,4 +4,7 @@
   <div class="content_description">
     <p class="content_description__text">Welcome to application for constructing and playing the quiz-games</p>
   </div>
+  @if (loggedIn) {
+    <button matButton="outlined" routerLink="/lobby">Go to lobby</button>
+  }
 </div>

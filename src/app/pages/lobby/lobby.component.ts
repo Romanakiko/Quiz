@@ -1,70 +1,28 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
-import {
-  MatCell, MatCellDef,
-  MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef,
-  MatNoDataRow, MatRow, MatRowDef,
-  MatTable,
-  MatTableDataSource
-} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, MatSortHeader} from '@angular/material/sort';
-import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {Folder} from '../../folder/folder';
 import {FolderService} from '../../folder/folder.service';
 import {GameService} from '../../game/game.service';
+import {TableComponent} from '../../ui/table/table.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-lobby',
   imports: [
     MatIcon,
-    MatFormField,
-    MatLabel,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
-    MatSort,
-    MatInput,
-    MatPaginator,
-    MatNoDataRow,
-    MatRowDef,
-    MatHeaderRowDef,
-    MatCellDef,
-    MatHeaderCellDef,
-    MatFormField,
-    MatSortHeader,
-    MatHeaderRow,
-    MatRow
+    TableComponent,
+    RouterLink
   ],
   providers: [FolderService, GameService],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss'
 })
-export class LobbyComponent  implements AfterViewInit {
-  displayedColumns: string[] = [ 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<Folder>;
+export class LobbyComponent {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  @ViewChild(MatSort) sort: MatSort | null = null;
+  private folderService = inject(FolderService);
+  private gameService = inject(GameService);
 
-  constructor() {
-    const folders: Folder[] = [];
-    this.dataSource = new MatTableDataSource(folders);
-  }
+  folders = computed(() => this.folderService.userFolders() ?? undefined);
+  games = computed(() => this.gameService.userGames() ?? undefined);
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  constructor() {}
 }

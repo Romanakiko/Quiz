@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, input, ViewChild} from '@angular/core';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {Folder} from '../../folder/folder';
 
 @Component({
   selector: 'app-table',
@@ -12,15 +11,16 @@ import {Folder} from '../../folder/folder';
   imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatFormField, MatInput, MatLabel]
 })
 export class TableComponent implements AfterViewInit {
-  displayedColumns: string[] = [ 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<Folder>;
+  displayedColumns = input([ 'id', 'name' ]);
+  dataArray = input<any[] | undefined>([]);
+
+  dataSource: MatTableDataSource<any | undefined | null>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   @ViewChild(MatSort) sort: MatSort | null = null;
 
   constructor() {
-    const folders: Folder[] = [];
-    this.dataSource = new MatTableDataSource(folders);
+    this.dataSource = new MatTableDataSource(this.dataArray())
   }
 
   ngAfterViewInit() {

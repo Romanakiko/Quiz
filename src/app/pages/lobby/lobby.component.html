@@ -4,12 +4,9 @@
     class="chapter__icon-add"
     aria-hidden="false"
     aria-label="add-folder icon"
-    fontIcon="add"/>
-
-  <div class="chapter-container">
-    <app-table/>
-  </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    fontIcon="add"
+    routerLink="folder/new"/>
+    <app-table [dataArray]="folders()"/>
 </div>
 
 <div class="chapter">
@@ -19,8 +16,5 @@
     aria-hidden="false"
     aria-label="add-game icon"
     fontIcon="add"/>
-  <div class="chapter-container">
-    <app-table/>
-  </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <app-table [dataArray]="games()"/>
 </div>
