@@ -136,4 +136,12 @@ export class SupabaseService {
       .select('*')
       .eq('email', email)
   }
+
+  async getQuestionsInFolder(email: string, folderId: string) {
+    return this.supabase
+      .from('Questions')
+      .select('*')
+      .eq('email', email)
+      .eq('folder_id', folderId)
+  }
 }

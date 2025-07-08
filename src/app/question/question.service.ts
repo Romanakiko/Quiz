@@ -8,6 +8,8 @@ export class QuestionService {
 
   constructor() { }
 
+  questionList = signal<Question[]>([]);
+
   private questions = new Map<string, Question>();
 
   public generateQuestion(text: string, options: QuestionOption[], multiple: boolean = false): void {
@@ -28,6 +30,10 @@ export class QuestionService {
 
   public getAllQuestions(): Question[] {
     return Array.of(...this.questions.values());
+  }
+
+  private getQuestions(): void {
+
   }
 
 }
