@@ -1,4 +1,4 @@
-import {Component, inject, linkedSignal, signal} from '@angular/core';
+import {Component, computed, inject, linkedSignal, signal} from '@angular/core';
 import {EditableTextComponent} from '../../../ui/editable-text/editable-text.component';
 import {TableComponent} from '../../../ui/table/table.component';
 import {QuestionService} from '../../../question/question.service';
@@ -24,8 +24,10 @@ export class FolderComponent {
   //   }
   // })
   name = signal<string>('');
+  questions = computed(() => this.questionService.questions.value());
 
   async createFolder(name: string) {
     await this.folderService.newFolder(name);
   }
+
 }
