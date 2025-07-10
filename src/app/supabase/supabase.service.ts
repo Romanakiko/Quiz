@@ -11,10 +11,10 @@ import { environment} from '../../environments/environment';
 import {IUser} from '../user/user';
 import {Folder} from '../folder/folder';
 import {Game} from '../game/game';
+import {Question} from '../question/question';
 
 export type DataTables = 'Answers' | 'Folder' | 'Game' | 'Options' | 'Questions' | 'Questions_in_game' | 'Users_in_game';
-export type DataTypes = Folder | Game;
-export type DataTypeArray = Folder[] | Game[];
+export type DataTypes = Folder | Game | Question;
 
 @Injectable({
   providedIn: 'root',
@@ -34,14 +34,6 @@ export class SupabaseService {
     })
     console.log('get session function fired', this._session);
     return this._session;
-  }
-
-  profile(user: User) {
-    return this.supabase
-      .from('profiles')
-      .select(`username, website, avatar_url`)
-      .eq('id', user.id)
-      .single()
   }
 
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
@@ -136,6 +128,29 @@ export class SupabaseService {
       .select('*')
       .eq('email', email)
   }
+  async getOwnRowById(email: string, table: DataTables, rowId: string) {
+    return this.supabase
+      .from(table)
+      .select('*')
+      .eq('email', email)
+      .eq('id', rowId)
+  }
+
+  async changeRow(email: string, table: DataTables, rowId: string, payload: {[parameter: string]: any}) {
+    return this.supabase
+      .from(table)
+      .update(payload)
+      .eq('email', email)
+      .eq('id', rowId)
+      .select()
+  }
+
+  async deleteRow(table: DataTables, rowId: string) {
+    return this.supabase
+      .from(table)
+      .delete()
+      .eq('id', rowId)
+  }
 
   async getQuestionsInFolder(email: string, folderId: string) {
     return this.supabase
@@ -143,5 +158,18 @@ export class SupabaseService {
       .select('*')
       .eq('email', email)
       .eq('folder_id', folderId)
+  }
+
+  async newFolder(userId: string, email: string, name: string) {
+    return this.supabase
+      .from('Folder')
+      .insert([
+        {
+          owner_id: userId,
+          name: name,
+          email: email,
+        },
+      ])
+      .select();
   }
 }
