@@ -1,4 +1,4 @@
 <label>Folder name:</label>
-<app-editable-text></app-editable-text>
+<app-editable-text [value]="name()" (value)="createFolder($event)"></app-editable-text>
 
 <app-table [displayedColumns]="['name', 'multiple', 'weight']"  ></app-table>
