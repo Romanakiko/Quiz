@@ -26,6 +26,7 @@ export class EditableTextComponent implements OnInit {
 
   enableEdit() {
     this.isEditable.set(true);
+    this.nameFormControl.patchValue(this._value() ?? "");
   }
 
   submitValue() {
