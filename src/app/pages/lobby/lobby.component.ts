@@ -12,7 +12,7 @@ import {RouterLink} from '@angular/router';
     TableComponent,
     RouterLink
   ],
-  providers: [FolderService, GameService],
+  providers: [GameService],
   templateUrl: './lobby.component.html',
   styleUrl: './lobby.component.scss'
 })
@@ -21,7 +21,7 @@ export class LobbyComponent {
   private folderService = inject(FolderService);
   private gameService = inject(GameService);
 
-  folders = computed(() => this.folderService.userFolders() ?? undefined);
+  folders = computed(() => this.folderService.userFolders.value() ?? undefined);
   games = computed(() => this.gameService.userGames() ?? undefined);
 
   constructor() {}

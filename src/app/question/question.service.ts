@@ -29,6 +29,10 @@ export class QuestionService {
     }
   })
 
+  setFolder(id: string) {
+    this.folderId.set(id);
+  }
+
   // private questions = new Map<string, Question>();
   //
   // public generateQuestion(text: string, options: QuestionOption[], multiple: boolean = false): void {
@@ -57,6 +61,7 @@ export class QuestionService {
       const { data, error }: { data: Question[] | null; error: any } = await this.supabaseService.getQuestionsInFolder(this.userService.userInfo()?.email ?? '', FolderId);
       if (error) throw error;
       this._questions.set(data ?? []);
+      console.log("(QuestionService) QuestionsInFolder=", data);
     } catch (error) {
       console.log("QuestionsInFolderError=", error);
       if (error instanceof Error) {

@@ -12,7 +12,7 @@ export const routes: Routes = [
     component: FolderComponent,
   },
   {
-    path: 'folder/:id',
+    path: 'folder/:folder_id',
     component: FolderComponent,
   }
   // {
