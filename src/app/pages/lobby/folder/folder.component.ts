@@ -26,11 +26,6 @@ export class FolderComponent {
 
   folder_id = input<string | null>(null)
 
-  // name = linkedSignal({
-  //   computation: (source, previous) => {
-  //
-  //   }
-  // })
   name = resource<string, {id: string | null, email: IUser | null}>({
     defaultValue: '',
     params: (): {id: string | null, email: IUser | null} => ({

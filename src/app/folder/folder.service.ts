@@ -55,7 +55,7 @@ export class FolderService {
   async getFolderById(folder_id: string): Promise<Folder | null> {
     try {
       this.headerService.loading.set(true);
-      const {data, error} = await this.supabaseService.getOwnRowById(this.userService.userInfo()?.email ?? '',"Folder", folder_id);
+      const {data, error} = await this.supabaseService.getOwnRowById("Folder", folder_id);
       if (error) throw error;
 
       let currentFolder = data?.map<Folder>(element => ({
@@ -104,7 +104,7 @@ export class FolderService {
   async changeName(name: string, folder_id: string): Promise<Folder | null> {
     try {
       this.headerService.loading.set(true);
-      const {data, error} = await this.supabaseService.changeRow(this.userService.userInfo()?.id ?? '', "Folder", folder_id, {'name': name});
+      const {data, error} = await this.supabaseService.changeRow("Folder", folder_id, {'name': name});
       if (error) throw error;
       let newFolder = data?.map<Folder>(element => ({
         id: element.id,
