@@ -18,11 +18,11 @@ import {IUser} from '../../../user/user';
   styleUrl: './folder.component.scss'
 })
 export class FolderComponent {
-  folderService = inject(FolderService);
-  questionService = inject(QuestionService);
-  userService = inject(UserService);
-  router = inject(Router);
-  activatedRoute = inject(ActivatedRoute);
+  private folderService = inject(FolderService);
+  private questionService = inject(QuestionService);
+  private userService = inject(UserService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
   folder_id = input<string | null>(null)
 

@@ -6,7 +6,7 @@
     aria-label="add-folder icon"
     fontIcon="add"
     routerLink="folder/new"/>
-    <app-table [dataArray]="folders()"/>
+    <app-table [dataArray]="folders()" (rowClick)="foldersTableLink($event)"/>
 </div>
 
 <div class="chapter">

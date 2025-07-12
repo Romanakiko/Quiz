@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, EventEmitter, input, output, ViewChild} from '@angular/core';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -13,6 +13,7 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 export class TableComponent implements AfterViewInit {
   displayedColumns = input([ 'id', 'name' ]);
   dataArray = input<any[] | undefined>([]);
+  rowClick = output<string>();
 
   dataSource: MatTableDataSource<any | undefined | null> = new MatTableDataSource(this.dataArray());
 
