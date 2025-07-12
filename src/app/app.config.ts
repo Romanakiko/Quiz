@@ -1,12 +1,12 @@
 import {ApplicationConfig, provideZoneChangeDetection, provideZonelessChangeDetection,} from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {provideRouter, withComponentInputBinding} from '@angular/router';
 
 import { routes } from './app.routes';
 import {GoogleLoginProvider, SocialAuthServiceConfig} from '@abacritt/angularx-social-login';
 import {environment} from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZonelessChangeDetection(), provideRouter(routes), {
+  providers: [provideZonelessChangeDetection(), provideRouter(routes, withComponentInputBinding()), {
     provide: "SocialAuthServiceConfig",
     useValue: {
       autoLogin: false,

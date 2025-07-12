@@ -128,19 +128,17 @@ export class SupabaseService {
       .select('*')
       .eq('email', email)
   }
-  async getOwnRowById(email: string, table: DataTables, rowId: string) {
+  async getOwnRowById(table: DataTables, rowId: string) {
     return this.supabase
       .from(table)
       .select('*')
-      .eq('email', email)
       .eq('id', rowId)
   }
 
-  async changeRow(email: string, table: DataTables, rowId: string, payload: {[parameter: string]: any}) {
+  async changeRow(table: DataTables, rowId: string, payload: {[parameter: string]: any}) {
     return this.supabase
       .from(table)
       .update(payload)
-      .eq('email', email)
       .eq('id', rowId)
       .select()
   }

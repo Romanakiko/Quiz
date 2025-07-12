@@ -11,3 +11,8 @@
     width: 100%;
   }
 }
+
+.mat-row:hover {
+  cursor: pointer;
+  background-color: var(--mat-sys-outline);
+}
