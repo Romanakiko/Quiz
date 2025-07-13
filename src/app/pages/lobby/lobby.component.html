@@ -6,7 +6,7 @@
     aria-label="add-folder icon"
     fontIcon="add"
     routerLink="folder/new"/>
-    <app-table [dataArray]="folders()" (rowClick)="foldersTableLink($event)"/>
+    <app-table [dataArray]="folders()" (rowClick)="tableLink('folder', $event)"/>
 </div>
 
 <div class="chapter">
@@ -15,6 +15,7 @@
     class="chapter__icon-add"
     aria-hidden="false"
     aria-label="add-game icon"
-    fontIcon="add"/>
-    <app-table [dataArray]="games()"/>
+    fontIcon="add"
+    routerLink="game/new"/>
+    <app-table [dataArray]="games()" (rowClick)="tableLink('game', $event)"/>
 </div>

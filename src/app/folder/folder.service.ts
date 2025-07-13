@@ -111,7 +111,7 @@ export class FolderService {
         name: element.name || '',
         createdAt: new Date(element.created_at)
       }))[0];
-      this.userFolders.update( (folders) => (folders ? [ ...folders,newFolder ] : [newFolder] ));
+      this.userFolders.update( (folders) => (folders?.map(folder => folder.id !== folder_id ? folder : newFolder) ?? []));
       console.log("(FolderService) NewFolder=", data);
       return newFolder;
     } catch (error) {
