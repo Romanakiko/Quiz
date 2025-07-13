@@ -26,7 +26,7 @@ export class LobbyComponent {
   folders = computed(() => this.folderService.userFolders.value() ?? undefined);
   games = computed(() => this.gameService.userGames() ?? undefined);
 
-  foldersTableLink(id: string): void {
-    this.router.navigate(['folder', id], { relativeTo: this.activatedRoute});
+  tableLink(origin: 'folder' | 'game', id: string): void {
+    this.router.navigate([origin, id], { relativeTo: this.activatedRoute});
   }
 }
