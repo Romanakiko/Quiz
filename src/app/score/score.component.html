@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Quiz Results</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #3b82f6;--secondary-color: #111827;--background-color: #1f2937;--text-primary: #f9fafb;--text-secondary: #9ca3af;--accent-color: #374151;}
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: var(--secondary-color);
+      color: var(--text-primary);
+    }
+    .card {
+      @apply bg-[var(--background-color)] rounded-md shadow-md p-6;
+    }
+    .button_primary {
+      @apply bg-[var(--primary-color)] text-white py-2 px-4 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+    }
+    .button_secondary {
+      @apply bg-[var(--accent-color)] text-[var(--text-primary)] py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50;
+    }
+    .input {
+      @apply bg-[var(--background-color)] border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+    }
+    .typography_h1 {
+      @apply text-3xl font-bold text-[var(--text-primary)] mb-4;
+    }
+    .typography_h2 {
+      @apply text-2xl font-semibold text-[var(--text-primary)] mb-2;
+    }
+    .typography_body {
+      @apply text-base text-[var(--text-secondary)];
+    }
+  </style>
+</head>
+<body>
+<div class="min-h-screen bg-[var(--secondary-color)]">
+  <header class="bg-[var(--background-color)] shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="text-[var(--primary-color)]">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path>
+            </svg>
+          </div>
+          <h1 class="text-xl font-bold text-[var(--text-primary)]">QuizMaster</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+          <a class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)]" href="#">Home</a>
+          <a class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)]" href="#">Create</a>
+          <a class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)]" href="#">Explore</a>
+        </nav>
+        <div class="flex items-center gap-4">
+          <button class="rounded-full p-2 text-[var(--text-secondary)] hover:bg-[var(--accent-color)] hover:text-[var(--primary-color)]">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+            </svg>
+          </button>
+          <div class="h-10 w-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBkLQRa6BkJMeqFgi-e0AxXmNcPqBvdYrC2Hq-5xkIhABFapadqFGegIRWeuVeGg6wxE2INXGSysn1hVbzDPbqhJgKAmlY1b2GU8k_FDUXWKMxK_RUH0tGoSHWJm0a8vsyM0jjXZXjesDMchsxIwAfNEDX_F-CHv28l2HdhH7Ubj8tacTsjdpu4_TLoJlzeb6JRM8quRgbgxhlYUHIStB5b5d1MS5Uj44N-yqrKGk4vKPPLl8yBwBsJwweqc1Ewqup_fhGpe0N6BEWo");'></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      <div class="text-center">
+        <h1 class="typography_h1">Congratulations on Completing the Quiz!</h1>
+        <p class="typography_body">Here's a summary of your performance in the 'History Buff' quiz.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="card flex flex-col items-center justify-center text-center">
+          <p class="text-lg font-medium text-[var(--text-secondary)]">Your Score</p>
+          <p class="text-5xl font-bold text-[var(--primary-color)]">8/10</p>
+        </div>
+        <div class="card flex flex-col items-center justify-center text-center">
+          <p class="text-lg font-medium text-[var(--text-secondary)]">Time Taken</p>
+          <p class="text-4xl font-bold text-[var(--text-primary)]">15:00</p>
+        </div>
+        <div class="card flex flex-col items-center justify-center text-center">
+          <p class="text-lg font-medium text-[var(--text-secondary)]">Accuracy</p>
+          <p class="text-5xl font-bold text-green-400">80%</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div class="card">
+          <h2 class="typography_h2">Answer Breakdown</h2>
+          <div class="mt-4 space-y-4">
+            <div class="flex items-center justify-between rounded-lg bg-green-900/50 p-4">
+              <p class="font-medium text-green-300">Correct Answers</p>
+              <p class="font-bold text-green-300">8</p>
+            </div>
+            <div class="flex items-center justify-between rounded-lg bg-red-900/50 p-4">
+              <p class="font-medium text-red-300">Incorrect Answers</p>
+              <p class="font-bold text-red-300">2</p>
+            </div>
+            <div class="flex items-center justify-between rounded-lg bg-gray-700/50 p-4">
+              <p class="font-medium text-[var(--text-secondary)]">Unanswered</p>
+              <p class="font-bold text-[var(--text-secondary)]">0</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="typography_h2">Leaderboard</h2>
+          <div class="mt-4 flow-root">
+            <div class="-my-2 overflow-x-auto">
+              <div class="inline-block min-w-full py-2 align-middle">
+                <table class="min-w-full divide-y divide-gray-700">
+                  <thead>
+                  <tr>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-[var(--text-primary)] sm:pl-0" scope="col">Rank</th>
+                    <th class="px-3 py-3.5 text-left text-sm font-semibold text-[var(--text-primary)]" scope="col">Player</th>
+                    <th class="px-3 py-3.5 text-left text-sm font-semibold text-[var(--text-primary)]" scope="col">Score</th>
+                    <th class="relative py-3.5 pl-3 pr-4 sm:pr-0 text-left text-sm font-semibold text-[var(--text-primary)]" scope="col">Time</th>
+                  </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-700">
+                  <tr class="bg-[var(--accent-color)]">
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-[var(--primary-color)] sm:pl-0">1st</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-[var(--primary-color)]">You (Olivia Davis)</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">8/10</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">15:00</td>
+                  </tr>
+                  <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-[var(--text-primary)] sm:pl-0">2nd</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">Sophia Clark</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">10/10</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">12:00</td>
+                  </tr>
+                  <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-[var(--text-primary)] sm:pl-0">3rd</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">Ethan Miller</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">9/10</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">14:00</td>
+                  </tr>
+                  <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-[var(--text-primary)] sm:pl-0">4th</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">Liam Wilson</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">7/10</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">16:00</td>
+                  </tr>
+                  <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-[var(--text-primary)] sm:pl-0">5th</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">Ava Martinez</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">6/10</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-[var(--text-secondary)]">18:00</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-4 pt-4">
+        <button class="button_secondary">Review Answers</button>
+        <button class="button_primary">Play Again</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body></html>
