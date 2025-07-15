@@ -1,1 +1,117 @@
-<p>question works!</p>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>QuizTime - Live Quiz</title>
+  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #1e293b;
+      --background-color: #111827;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --accent-color: #1e293b;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      @apply bg-[var(--background-color)] text-[var(--text-primary)];
+    }
+    .button_primary {
+      @apply bg-[var(--primary-color)] text-white py-3 px-6 rounded-lg text-base font-bold hover:bg-blue-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50;
+    }
+    .button_secondary {
+      @apply bg-[var(--secondary-color)] text-[var(--text-primary)] py-3 px-6 rounded-lg text-base font-bold hover:bg-slate-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50;
+    }
+  </style>
+</head>
+<body class="antialiased">
+<div class="relative flex min-h-screen flex-col bg-gray-900 group/design-root overflow-x-hidden">
+  <header class="sticky top-0 z-30 w-full bg-gray-900/80 backdrop-blur-sm shadow-sm">
+    <div class="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-3" href="#">
+          <svg class="h-8 w-8 text-[var(--primary-color)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+          </svg>
+          <h1 class="text-2xl font-bold tracking-tighter text-[var(--text-primary)]">QuizTime</h1>
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <nav class="hidden md:flex items-center gap-6">
+          <a class="text-base font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors" href="#">Home</a>
+          <a class="text-base font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors" href="#">Create</a>
+          <a class="text-base font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors" href="#">Join</a>
+        </nav>
+        <button class="relative rounded-full p-2 text-[var(--text-secondary)] hover:bg-slate-800 hover:text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-[var(--primary-color)]">
+          <span class="sr-only">View notifications</span>
+          <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+          </svg>
+        </button>
+        <div class="h-10 w-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDewKww7PgGne4HjojGSQde_j82oPN8X1Hmowg2ZuUJgCp_05gMW4E1hMBJJo5swxX61ffc3f3X-30QafENkfod-iPgJtrXMfIIh0sglP7N3q2z892L6cejeSMH-9ExCu4LLVlf-nTk1YboAvB5Hri5zBa46Qp1GpH788Aj6YGsHkA1H-A-iGES_X3j9llAF-8FSkixee-3CbebfXapzwn6EQoTK_N5gwPDpj-ahrDD2xv-i02bmyBF-okDLCLL1VAHn_m93px9Z9dv");'></div>
+      </div>
+    </div>
+  </header>
+  <main class="flex flex-1 items-center justify-center py-12">
+    <div class="w-full max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="bg-slate-800 rounded-2xl shadow-2xl p-8 space-y-8">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between text-lg font-semibold text-[var(--text-secondary)]">
+            <p>Question 3 of 5</p>
+            <div class="flex items-center gap-2">
+              <svg class="text-red-500" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>15s</span>
+            </div>
+          </div>
+          <div class="h-3 w-full rounded-full bg-slate-700">
+            <div class="h-3 rounded-full bg-[var(--primary-color)]" style="width: 60%;"></div>
+          </div>
+        </div>
+        <div class="text-center space-y-6">
+          <h2 class="text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">Which of these is a primary color?</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <button class="button_secondary flex items-center justify-center p-6 text-xl font-bold transition-transform duration-200 hover:scale-105">
+              <span>Green</span>
+            </button>
+            <button class="button_primary flex items-center justify-center p-6 text-xl font-bold transition-transform duration-200 hover:scale-105">
+              <span>Blue</span>
+            </button>
+            <button class="button_secondary flex items-center justify-center p-6 text-xl font-bold transition-transform duration-200 hover:scale-105">
+              <span>Orange</span>
+            </button>
+            <button class="button_secondary flex items-center justify-center p-6 text-xl font-bold transition-transform duration-200 hover:scale-105">
+              <span>Purple</span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center justify-center pt-6">
+          <div class="flex items-center gap-4 text-center">
+            <div class="flex flex-col items-center">
+              <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--accent-color)] text-4xl font-bold text-[var(--primary-color)]">
+                <span>00</span>
+              </div>
+              <p class="mt-2 text-sm font-medium text-[var(--text-secondary)]">Minutes</p>
+            </div>
+            <span class="text-4xl font-bold text-[var(--text-secondary)]">:</span>
+            <div class="flex flex-col items-center">
+              <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--accent-color)] text-4xl font-bold text-[var(--primary-color)]">
+                <span class="animate-pulse">15</span>
+              </div>
+              <p class="mt-2 text-sm font-medium text-[var(--text-secondary)]">Seconds</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body></html>

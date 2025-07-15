@@ -3,6 +3,7 @@ import {SupabaseService} from '../../supabase/supabase.service';
 import {HeaderService} from '../../header/header.service';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {SocialAuthService} from '@abacritt/angularx-social-login';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthService implements OnDestroy {
   private supabaseService = inject(SupabaseService);
   private headerService = inject(HeaderService);
   private googleAuthService = inject(SocialAuthService)
+  private router = inject(Router);
   private googleAuthSub: Subscription | null = null;
   private isLoggedIn = false
 
@@ -118,6 +120,7 @@ export class AuthService implements OnDestroy {
 
   public signOut(): void {
     this.doSignOut().then(() => {});
+    this.router.navigate(['/']).then(r => {});
   }
 
 

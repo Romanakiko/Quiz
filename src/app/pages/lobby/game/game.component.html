@@ -1,1 +1,172 @@
-<p>game works!</p>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Quiz Master - Create New Game</title>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #0c77f2;
+      --secondary-color: #1e293b;
+      --background-color: #0f172a;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #334155;
+      --border-color: #334155;
+    }
+    .button_primary {
+      @apply bg-[var(--primary-color)] text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300;
+    }
+    .button_secondary {
+      @apply bg-[var(--secondary-color)] text-white py-2 px-4 rounded-md hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+    }
+    .input {
+      @apply bg-[var(--secondary-color)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full;
+    }
+    .toggle-bg:after {
+      content: '';
+      @apply absolute top-0.5 left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition-transform duration-300;
+    }
+    input:checked + .toggle-bg:after {
+      @apply transform translate-x-full;
+    }
+    input:checked + .toggle-bg {
+      @apply bg-[var(--primary-color)];
+    }
+    .game-type-card:hover {
+      @apply border-[var(--primary-color)] transform -translate-y-1;
+    }
+    input[type="radio"]:checked + .game-type-card {
+      @apply border-[var(--primary-color)] ring-2 ring-[var(--primary-color)];
+    }
+  </style>
+</head>
+<body class="bg-[var(--background-color)] text-[var(--text-primary)] font-sans">
+<div class="relative flex size-full min-h-screen flex-col overflow-x-hidden">
+  <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] px-10 py-3 shadow-sm">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-3 text-[var(--text-primary)]">
+        <svg class="h-8 w-8 text-[var(--primary-color)]" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z"></path>
+        </svg>
+        <h1 class="text-xl font-bold">QuizMaster</h1>
+      </div>
+      <nav class="hidden md:flex items-center gap-9">
+        <a class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">Home</a>
+        <a class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">Discover</a>
+        <a class="text-sm font-medium text-[var(--text-primary)]" href="#">Create</a>
+        <a class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">My Library</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="relative hidden sm:block">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3">
+<svg class="h-5 w-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" fill-rule="evenodd"></path>
+</svg>
+</span>
+        <input class="w-64 rounded-md border-[var(--border-color)] bg-[var(--secondary-color)] pl-10 pr-4 py-2 text-sm text-[var(--text-primary)] focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" placeholder="Search" type="search"/>
+      </div>
+      <button class="rounded-full p-2 hover:bg-[var(--secondary-color)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50">
+        <svg class="h-6 w-6 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+      <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeyhzuZgNn7BCZYEfIs8jVgZyW8e5m-_uqAYeJOqaJdnKxp-BwjvpuNQAkxp4HPrZLGlCTshWvi2-JywAw3YmQ7RD69OCyJNGAjvVkxhEJDMJdWrjnxLf4Oqm28nSg_K174m9p40xPv_pYlYP92XrZAqL-u5fDRgu1VHrDMPiUUVO-VSuUezUxJFiV5-pv2DgvNzB8_gxOeHOt_8yxrJriYuKPrZxi0nFbL7v8pVtk16Sy2xe9z8LpjyAVyoqRyw5xwhXCE8ycvCFv");'></div>
+    </div>
+  </header>
+  <main class="flex-1 bg-background-color">
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+      <div class="mb-10 text-center">
+        <h1 class="text-4xl font-bold text-text-primary tracking-tight">Create a New Game</h1>
+        <p class="mt-2 text-lg text-text-secondary">Fill in the details below to set up your new quiz game.</p>
+      </div>
+      <div class="space-y-8">
+        <section class="bg-[var(--secondary-color)] rounded-xl shadow-lg border border-[var(--border-color)] overflow-hidden">
+          <div class="p-8">
+            <h2 class="text-2xl font-semibold text-text-primary mb-6">Game Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2" for="game-name">Game Name</label>
+                <input class="input" id="game-name" placeholder="e.g., 'Ultimate Sci-Fi Movie Trivia'" type="text"/>
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2" for="game-description">Description</label>
+                <textarea class="input min-h-32" id="game-description" placeholder="Describe your game. What's it about? Who is it for?"></textarea>
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-4">Game Type</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <input checked="" class="sr-only" id="game-type-individual" name="game-type" type="radio" value="individual"/>
+                    <label class="game-type-card flex flex-col items-center justify-center p-6 bg-[var(--accent-color)]/50 border-2 border-[var(--border-color)] rounded-lg cursor-pointer transition-all duration-300" for="game-type-individual">
+                      <svg class="h-12 w-12 text-[var(--primary-color)] mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                      <h3 class="font-semibold text-lg text-text-primary">Individual</h3>
+                      <p class="text-sm text-center text-text-secondary mt-1">Each player competes for themselves.</p>
+                    </label>
+                  </div>
+                  <div>
+                    <input class="sr-only" id="game-type-collective" name="game-type" type="radio" value="collective"/>
+                    <label class="game-type-card flex flex-col items-center justify-center p-6 bg-[var(--accent-color)]/50 border-2 border-[var(--border-color)] rounded-lg cursor-pointer transition-all duration-300" for="game-type-collective">
+                      <svg class="h-12 w-12 text-[var(--primary-color)] mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.962A3.75 3.75 0 0 1 9 10.5V9A4.5 4.5 0 0 1 13.5 4.5v.75m-6.75 6.75a3.75 3.75 0 0 1-7.5 0a3.75 3.75 0 0 1 7.5 0ZM10.5 6a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                      <h3 class="font-semibold text-lg text-text-primary">Collective</h3>
+                      <p class="text-sm text-center text-text-secondary mt-1">Players are grouped into competing teams.</p>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="bg-[var(--secondary-color)] rounded-xl shadow-lg border border-[var(--border-color)]">
+          <div class="p-8">
+            <h2 class="text-2xl font-semibold text-text-primary mb-6">Game Settings</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+              <div>
+                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2" for="timer">Timer (seconds)</label>
+                <input class="input" id="timer" min="0" placeholder="e.g., 30" type="number"/>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[var(--text-secondary)] mb-2" for="fail-weight">Fail Weight</label>
+                <input class="input" id="fail-weight" min="0" placeholder="e.g., 1" type="number"/>
+              </div>
+              <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+                <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-[var(--accent-color)] transition-colors">
+                  <input checked="" class="form-checkbox h-5 w-5 text-[var(--primary-color)] bg-[var(--secondary-color)] border-[var(--border-color)] rounded focus:ring-[var(--primary-color)]" id="show-answer-status" type="checkbox"/>
+                  <span class="text-text-primary">Show Answer Status</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-[var(--accent-color)] transition-colors">
+                  <input class="form-checkbox h-5 w-5 text-[var(--primary-color)] bg-[var(--secondary-color)] border-[var(--border-color)] rounded focus:ring-[var(--primary-color)]" id="show-answers" type="checkbox"/>
+                  <span class="text-text-primary">Show Correct Answers</span>
+                </label>
+              </div>
+              <div class="md:col-span-2 flex items-center justify-between p-3 rounded-lg bg-[var(--accent-color)]/50 mt-4">
+                <div>
+                  <h3 class="font-medium text-text-primary">Standalone Mode</h3>
+                  <p class="text-sm text-text-secondary">Players can join and play anytime.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer" for="standalone-toggle">
+                  <input checked="" class="sr-only peer" id="standalone-toggle" type="checkbox" value=""/>
+                  <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-800 toggle-bg"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="flex justify-end pt-6">
+          <button class="button_primary px-10 py-3 text-lg font-bold shadow-lg hover:shadow-blue-500/50 transform hover:-translate-y-1">
+            <span class="truncate">Create Game</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body></html>
