@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Quiz Lobby</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #0c77f2;
+      --secondary-color: #1e293b;
+      --background-color: #0f172a;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #1e293b;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-primary);
+    }
+    .button_primary {
+      @apply bg-[var(--primary-color)] text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+    }
+    .button_secondary {
+      @apply bg-[var(--secondary-color)] text-[var(--text-primary)] py-2 px-4 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50;
+    }
+    .typography_h1 {
+      @apply text-3xl font-bold text-[var(--text-primary)] mb-4;
+    }
+    .typography_h2 {
+      @apply text-2xl font-semibold text-[var(--text-primary)] mb-2;
+    }
+    .typography_body {
+      @apply text-base text-[var(--text-secondary)];
+    }
+  </style>
+</head>
+<body class="bg-slate-900">
+<div class="relative flex size-full min-h-screen flex-col overflow-x-hidden">
+  <header class="sticky top-0 z-50 w-full bg-slate-900/80 backdrop-blur-md">
+    <div class="container mx-auto flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-4 text-text-primary">
+        <div class="size-8 text-[var(--primary-color)]">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold leading-tight tracking-tighter">QuizUp</h2>
+      </div>
+      <div class="hidden items-center gap-8 md:flex">
+        <a class="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary" href="#">Home</a>
+        <a class="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary" href="#">Create</a>
+        <a class="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary" href="#">Explore</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="flex size-10 items-center justify-center rounded-full bg-secondary-color text-text-primary transition-colors hover:bg-slate-700">
+          <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+          </svg>
+        </button>
+        <div class="size-10 rounded-full bg-cover bg-center bg-no-repeat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwAVVdV1KpMRfCeyT0qEgS8b1AlEnWbRE0gaXumoc8rZD-eFKVL0D7kYRnbpMCohKH6ujwCfaW8615zUT1aRkZfohYgt3V6kZG2QUB6ASIDh3ABW-tAl2WXyC_Y8eI_ImpOv2piaCBLt3pJeLQIZOGJmxB1BwcNJzlNxXmKhmWfdYe5vJtT4JM4zONnVXhGNH70UE9shObsuJfrGo2VSXHBYdSqZNTE0rn3j9r4zM2CpNZPKEf3NvtlS070vOFjvFOkH3JpyZ3Lxhp");'></div>
+      </div>
+    </div>
+  </header>
+  <main class="container mx-auto flex-1 px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <div class="rounded-xl border border-slate-800 bg-slate-900 shadow-lg">
+        <div class="p-8 text-center">
+          <h1 class="typography_h1 text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl">Trivia Night: History Buffs</h1>
+          <p class="typography_body mx-auto mt-4 max-w-2xl text-lg">Get ready to test your knowledge of historical events and figures!</p>
+        </div>
+        <div class="flex justify-center gap-4 border-y border-slate-800 bg-slate-800/50 px-8 py-6 sm:gap-8">
+          <div class="flex flex-col items-center">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--accent-color)] text-3xl font-bold text-text-primary sm:h-24 sm:w-24 sm:text-4xl">00</div>
+            <p class="mt-2 text-sm font-medium text-text-secondary">Hours</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--accent-color)] text-3xl font-bold text-text-primary sm:h-24 sm:w-24 sm:text-4xl">05</div>
+            <p class="mt-2 text-sm font-medium text-text-secondary">Minutes</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--accent-color)] text-3xl font-bold text-text-primary sm:h-24 sm:w-24 sm:text-4xl">30</div>
+            <p class="mt-2 text-sm font-medium text-text-secondary">Seconds</p>
+          </div>
+        </div>
+        <div class="p-8">
+          <h3 class="typography_h2 text-center text-xl font-semibold text-text-primary">Players Joined</h3>
+          <div class="mt-6 flex justify-center -space-x-4">
+            <div class="h-14 w-14 rounded-full border-4 border-slate-900 bg-cover bg-center shadow-md transition-transform hover:-translate-y-1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCERI-v1pvlFBXSv0oUeNFm2MoCjb7osn6hkFtFlr3JVmLtx8a1iNj2Qd8lFwWQUFbBUq4SALdO1P-PtTMRrlZAdaLc1CnZl3jSwcLjHF7iyrIw7B-mixibk9WcHqGs-_bmYK1bW1ghxilPSCXN11Y8jJqnFraVzhRwy6shBCVupPLoIMzW-SB_80vwbF8hl5NNK0w7kV993fDVjgWGuN0FF75NJVbOFMV65PNjLjsPdBQvnyQxO5CLS7KUEMh_79nl0hM21jbNInsP");'></div>
+            <div class="h-14 w-14 rounded-full border-4 border-slate-900 bg-cover bg-center shadow-md transition-transform hover:-translate-y-1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRVzPYloLECzw_bybi83Hxsq_SGCh9inTFHlcieem9eOmYxjnl_d3bzu5hi83zhfnTPVjpajWipSDSFBlgqzezjwykei4pcMu5AEwQWLHQUyL7Dr74rVnIRjj6z0imYM3w42va4IvgDlsCmJHor5XZRFWcfeHnQIxfcHLubC_POynb9LlcmPN1rzrKCgb0j7ZzSgA8Y6dVuGfeHo2eZhG1FvvJg2s-TdOOa_Ow9Yp4xEWouF3UzCtC9y_tv4W5whyO8_wqBeFMBIya");'></div>
+            <div class="h-14 w-14 rounded-full border-4 border-slate-900 bg-cover bg-center shadow-md transition-transform hover:-translate-y-1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAS_SqwmdFR2mSxI-UxQoNLyPWgzcpkgbgq87eIdn1SakRFz_fW6965d6h1VoofnYfwkHLyCI0mf1D--IB4CmbUVoAU5oBhd_X-doTNokJpicz5CQRFt6xG7lBpAow8wU9z1jtFiLjb0VbBxDvlN09r2vYpIwPymVCuXaGNZRP-VmWQHfrP3PxTR4_cIVTx8ivuG7n6FpHyfgAsUYZ2C_n3nZ3w6kRYXMiy-TZYizaWZHtjzMtwRVGGAyNosNI_bqzBPI1Cyk3CoLcl");'></div>
+            <div class="h-14 w-14 rounded-full border-4 border-slate-900 bg-cover bg-center shadow-md transition-transform hover:-translate-y-1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIZbLqvqO3VHzjztgvNskGPHbokvnXVEdfxjqjb5dLBxBZ20aegTv2qTi_pUJvD3tlYg9VUjtrxedok_AhJr0m175pgftV7AY1Syf3GYUI3140Tq_aX-7LWvf_uAK1s36Mtksdwu1PQMSCaoHHzcVSN5oNjUxRjK5D9NZMdjpCm0hkw9xPYsWGrPTQHm2C2RBX2d-uhq5nGG3MhGp14wlpTXalJDVb-i-JfqULlo1pr1V_trmaBdcMsrRtkHLFPRWiI1YZziNnvU5j");'></div>
+            <div class="h-14 w-14 rounded-full border-4 border-slate-900 bg-cover bg-center shadow-md transition-transform hover:-translate-y-1" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAdIoVmR6IA-319aU8ttK1ymivAKbRWjWUOFhGtYeT5G1gaIoUktF2UKxLDh4hgnCAb8uR5umCjgynD_dPEshTX3ToZA4dhg2wJCocDTWvFZIn7pHX2NrOnNMAEylcRbFwk7Xkt3CTiyRoFqpz3m9Yz2o0dc1bmuAEGj9_raoYQxgkSrlEOcCaeZZ-8P0f97cE8KFdayV_piylfZM09e7xHbPuwqNVMgzpLqp_cXekV9GHFOlCRi0-buFPWUEeBaK0Gh0UzqJyUrwSu");'></div>
+          </div>
+          <p class="typography_body mt-6 text-center">Waiting for more players to join...</p>
+          <div class="mt-8 flex justify-center">
+            <button class="button_secondary rounded-full px-8 py-3 font-bold">Leave Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body></html>
