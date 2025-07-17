@@ -8,10 +8,20 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
       @for(columnName of displayedColumns(); track $index) {
-        <ng-container [matColumnDef]="columnName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnName}} </th>
-          <td mat-cell *matCellDef="let row"> {{row[columnName]}} </td>
-        </ng-container>
+        @switch (columnName) {
+          @case ('createdAt') {
+            <ng-container [matColumnDef]="columnName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnName}} </th>
+              <td mat-cell *matCellDef="let row"> {{row[columnName] | date:'MMM dd, yyyy'}} </td>
+            </ng-container>
+          }
+          @default {
+            <ng-container [matColumnDef]="columnName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnName}} </th>
+              <td mat-cell *matCellDef="let row"> {{row[columnName]}} </td>
+            </ng-container>
+          }
+        }
       }
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>

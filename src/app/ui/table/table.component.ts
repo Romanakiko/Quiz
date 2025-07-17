@@ -3,12 +3,13 @@ import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatFormField, MatInput, MatLabel]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatFormField, MatInput, MatLabel, DatePipe]
 })
 export class TableComponent implements AfterViewInit {
   displayedColumns = input([ 'id', 'name' ]);
