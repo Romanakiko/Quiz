@@ -1,4 +1,9 @@
 <label>Folder name:</label>
 <app-editable-text [value]="this.name.value()" (value)="nameChanged($event)"></app-editable-text>
-
+<mat-icon
+  class="chapter__icon-add"
+  aria-hidden="false"
+  aria-label="add-game icon"
+  fontIcon="add"
+  routerLink="../../question/new"/>
 <app-table [displayedColumns]="['name', 'multiple', 'weight']"  [dataArray]="questions()"></app-table>

@@ -1,17 +1,20 @@
-import {Component, computed, inject, input, linkedSignal, resource} from '@angular/core';
+import {Component, computed, inject, input, resource} from '@angular/core';
 import {EditableTextComponent} from '../../../ui/editable-text/editable-text.component';
 import {TableComponent} from '../../../ui/table/table.component';
 import {QuestionService} from '../../../question/question.service';
 import {FolderService} from '../../../folder/folder.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {UserService} from '../../../user/user.service';
 import {IUser} from '../../../user/user';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-folder',
   imports: [
     EditableTextComponent,
-    TableComponent
+    TableComponent,
+    MatIcon,
+    RouterLink
   ],
   providers: [QuestionService],
   templateUrl: './folder.component.html',
@@ -53,6 +56,10 @@ export class FolderComponent {
       const newFolder = await this.folderService.changeName(name, this.folder_id() ?? '');
       this.name.set(newFolder?.name ?? name);
     }
+  }
+
+  newQuestion() {
+    this.router.navigate(['../', '../', 'question', 'new'], { relativeTo: this.activatedRoute});
   }
 
 }
