@@ -1,0 +1,364 @@
+
+// Color variables
+$primary-color: #0c77f2;
+$secondary-color: #1e293b;
+$background-color: #0f172a;
+$text-primary: #f8fafc;
+$text-secondary: #94a3b8;
+$accent-color: #334155;
+$border-color: #334155;
+
+// Utility mixins
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin grid-cols($cols) {
+  display: grid;
+  grid-template-columns: repeat($cols, minmax(0, 1fr));
+}
+
+// Base styles
+.app-container {
+  background-color: $background-color;
+  color: $text-primary;
+  min-height: 100vh;
+  font-family: 'Inter', 'Noto Sans', sans-serif;
+}
+
+.header {
+  background-color: $secondary-color;
+  border-bottom: 1px solid $border-color;
+  padding: 0 2.5rem;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .logo-icon {
+    color: $primary-color;
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .navigation {
+    display: none;
+    gap: 2.25rem;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-secondary;
+    transition: color 0.3s;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    &.active {
+      color: $text-primary;
+    }
+  }
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .search-field {
+    display: none;
+    width: 16rem;
+
+    @media (min-width: 640px) {
+      display: block;
+    }
+  }
+
+  .notification-btn {
+    color: $text-secondary;
+  }
+
+  .user-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    object-fit: cover;
+  }
+}
+
+.main-container {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3rem 1rem;
+}
+
+.title-container {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.main-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  color: $text-secondary;
+}
+
+.form-section {
+  background-color: $secondary-color;
+  border: 1px solid $border-color;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.game-type-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: 1rem;
+}
+
+.game-type-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.game-type-option {
+  position: relative;
+}
+
+.hidden-radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.game-type-card {
+  background-color: rgba($accent-color, 0.5);
+  border: 2px solid $border-color;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  height: 100%;
+
+  &:hover {
+    border-color: $primary-color;
+    transform: translateY(-0.25rem);
+  }
+}
+
+.selected-card {
+  border-color: $primary-color;
+  box-shadow: 0 0 0 2px $primary-color;
+}
+
+.game-card-content {
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.game-icon {
+  color: $primary-color;
+  font-size: 3rem;
+  height: 3rem;
+  width: 3rem;
+  margin-bottom: 0.75rem;
+  transform: scale(1.5);
+}
+
+.game-type-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.game-type-description {
+  font-size: 0.875rem;
+  color: $text-secondary;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.setting-field {
+  grid-column: span 1;
+}
+
+.toggles-container {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.form-toggle {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba($accent-color, 0.5);
+  }
+}
+
+.standalone-container {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: rgba($accent-color, 0.5);
+  margin-top: 1rem;
+}
+
+.standalone-info {
+  flex: 1;
+}
+
+.standalone-title {
+  font-weight: 500;
+}
+
+.standalone-description {
+  font-size: 0.875rem;
+  color: $text-secondary;
+}
+
+.standalone-toggle {
+  margin-left: 1rem;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1.5rem;
+}
+
+.submit-button {
+  padding: 0.75rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  box-shadow: 0 4px 6px rgba($primary-color, 0.5);
+  transition: all 0.3s;
+  transform: translateY(0);
+
+  &:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 10px 15px rgba($primary-color, 0.3);
+  }
+}
+
+// Angular Material overrides
+.mat-toolbar {
+  background: $secondary-color;
+  color: $text-primary;
+}
+
+.mat-card {
+  background: $secondary-color;
+  color: $text-primary;
+}
+
+.mat-form-field {
+  .mat-form-field-label,
+  .mat-input-element {
+    color: $text-primary;
+  }
+
+  .mat-form-field-outline {
+    color: $border-color;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+.mat-slide-toggle {
+  &.mat-checked {
+    .mat-slide-toggle-thumb {
+      background-color: $primary-color;
+    }
+    .mat-slide-toggle-bar {
+      background-color: rgba($primary-color, 0.54);
+    }
+  }
+}
