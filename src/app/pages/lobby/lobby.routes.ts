@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {LobbyComponent} from './lobby.component';
 import {FolderComponent} from './folder/folder.component';
 import {GameComponent} from './game/game.component';
+import {NewQuestionComponent} from './folder/new-question/new-question.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,14 @@ export const routes: Routes = [
   {
     path: 'folder/:folder_id',
     component: FolderComponent,
+  },
+  {
+    path: 'question/new',
+    component: NewQuestionComponent,
+  },
+  {
+    path: 'question/:question_id',
+    component: NewQuestionComponent,
   },
   {
     path: 'game/new',
