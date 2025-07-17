@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
-import {MatIcon} from '@angular/material/icon';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatCard} from '@angular/material/card';
-import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-new-question',
